@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:study_with_me/pages/home_page.dart';
 import 'package:study_with_me/pages/login_page.dart';
+import 'package:study_with_me/theme.dart';
 
 void main() {
   runApp(const MyApp());
@@ -14,15 +15,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
         title: 'Flutter Demo',
-        theme: ThemeData(
-            elevatedButtonTheme: ElevatedButtonThemeData(
-                style: ElevatedButton.styleFrom(
-          foregroundColor: Colors.black,
-          backgroundColor: Colors.white,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(0),
-          ),
-        ))),
+        debugShowCheckedModeBanner: false,
+        theme: theme(),
         initialRoute: "/login",
         routes: {
           "/login": (context) => LoginPage(),

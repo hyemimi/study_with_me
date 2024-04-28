@@ -1,15 +1,39 @@
 import 'package:flutter/material.dart';
+import 'package:study_with_me/screens/alarm_screen.dart';
+import 'package:study_with_me/screens/home_screen.dart';
+import 'package:study_with_me/screens/memberList_screen.dart';
+import 'package:study_with_me/theme.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  int _selectedIndex = 0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: ListView(children: [
-              SizedBox(height: 100.0),
-              Text("Study With Me Home", style: TextStyle(fontSize: 40)),
-              SizedBox(height: 20.0)
-            ])));
+      body: IndexedStack(
+        index: _selectedIndex,
+        children: [HomeScreen(), MemberlistScreen(), AlarmScreen()],
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
+        currentIndex: _selectedIndex,
+        onTap: (index) {
+          setState(() {
+            _selectedIndex = index;
+          });
+        },
+        items: [
+          const BottomNavigationBarItem(label: '홈', icon: Icon(Icons.home)),
+          const BottomNavigationBarItem(
+              label: '캘린더', icon: Icon(Icons.calendar_month)),
+          const BottomNavigationBarItem(label: '알람', icon: Icon(Icons.alarm)),
+        ],
+      ),
+    );
   }
 }
