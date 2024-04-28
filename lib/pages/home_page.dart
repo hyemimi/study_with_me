@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:study_with_me/screens/alarm_screen.dart';
 import 'package:study_with_me/screens/home_screen.dart';
-import 'package:study_with_me/screens/memberList_screen.dart';
+import 'package:study_with_me/screens/CalenderScreen.dart';
 import 'package:study_with_me/theme.dart';
 
 class HomePage extends StatefulWidget {
@@ -17,10 +17,11 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       body: IndexedStack(
         index: _selectedIndex,
-        children: [HomeScreen(), MemberlistScreen(), AlarmScreen()],
+        children: [HomeScreen(), CalenderScreen(), AlarmScreen()],
       ),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
+        showUnselectedLabels: false,
         currentIndex: _selectedIndex,
         onTap: (index) {
           setState(() {

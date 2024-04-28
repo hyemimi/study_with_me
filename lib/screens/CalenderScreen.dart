@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class MemberlistScreen extends StatelessWidget {
+class CalenderScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
