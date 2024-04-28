@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class CustomForm extends StatelessWidget {
+class LoginForm extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
   String _email = '';
   String _password = '';
@@ -18,7 +18,7 @@ class CustomForm extends StatelessWidget {
             submitButton(context),
             SizedBox(height: 10),
             TextButton(
-              onPressed: () => {Navigator.pushNamed(context, '/home')},
+              onPressed: () => {Navigator.pushNamed(context, '/signup')},
               child: const Text('계정이 없으신가요? 가입하기'),
             )
           ],

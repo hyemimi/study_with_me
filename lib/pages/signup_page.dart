@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:study_with_me/components/login_form.dart';
+import 'package:study_with_me/components/signup_form.dart';
 
-class LoginPage extends StatelessWidget {
+class SignupPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -9,10 +10,7 @@ class LoginPage extends StatelessWidget {
             padding: const EdgeInsets.all(16.0),
             child: ListView(children: [
               SizedBox(height: 100.0),
-              Center(
-                  child: Text("Study With Me", style: TextStyle(fontSize: 40))),
-              SizedBox(height: 20.0),
-              LoginForm()
+              SignupForm(),
             ])));
   }
 }
