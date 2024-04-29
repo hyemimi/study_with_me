@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:study_with_me/sidemenu/sidemenu.dart';
 
-class HomeScreen extends StatelessWidget {
+class CalenderScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,6 +19,6 @@ class HomeScreen extends StatelessWidget {
             },
           ),
         ),
-        body: Center(child: Text('home 화면')));
+        body: Center(child: Text('calender 화면')));
   }
 }

@@ -1,8 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:study_with_me/sidemenu/sidemenu.dart';
 
 class AlarmScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(appBar: AppBar(), body: Center(child: Text('alarm 화면')));
+    return Scaffold(
+        drawer: SideMenu(),
+        appBar: AppBar(
+          leading: Builder(
+            builder: (BuildContext context) {
+              return IconButton(
+                icon: Icon(
+                  Icons.menu,
+                  color: Colors.white,
+                ),
+                onPressed: () => Scaffold.of(context).openDrawer(),
+              );
+            },
+          ),
+        ),
+        body: Center(child: Text('alarm 화면')));
   }
 }

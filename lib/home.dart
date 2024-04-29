@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:study_with_me/screens/alarm_screen.dart';
 import 'package:study_with_me/screens/home_screen.dart';
-import 'package:study_with_me/screens/CalenderScreen.dart';
+import 'package:study_with_me/screens/calender_screen.dart';
 import 'package:study_with_me/theme.dart';
 
-class HomePage extends StatefulWidget {
+class Home extends StatefulWidget {
   @override
   _HomePageState createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends State<Home> {
   int _selectedIndex = 0;
 
   @override
