@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:study_with_me/home.dart';
 import 'package:study_with_me/pages/login_page.dart';
 import 'package:study_with_me/pages/signup_page.dart';
 import 'package:study_with_me/tabs/tabs.dart';
