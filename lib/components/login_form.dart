@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 
 class LoginForm extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
@@ -51,8 +52,14 @@ class LoginForm extends StatelessWidget {
       onPressed: () async {
         if (_formKey.currentState!.validate()) {
           _formKey.currentState!.save();
-          debugPrint('$_email, $_password 로그인 시도');
-          Navigator.pushNamed(context, '/home');
+
+          final response = await http.post(
+              Uri.parse('http://10.0.2.2:3000/login'),
+              body: {"email": _email, "pwd": _password});
+          if (response.statusCode == 200) {
+            // 로그인 성공
+            Navigator.pushNamed(context, '/home');
+          }
         }
       },
       child: Container(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 
 class SignupForm extends StatelessWidget {
   final _signupFormKey = GlobalKey<FormState>();
@@ -15,6 +16,7 @@ class SignupForm extends StatelessWidget {
           children: [
             Icon(Icons.person_pin_sharp, size: 100),
             SizedBox(height: 20),
+            SizedBox(height: 5.0),
             CustomTextFormField("Name"),
             SizedBox(height: 10),
             CustomTextFormField("Email"),
@@ -39,8 +41,7 @@ class SignupForm extends StatelessWidget {
         Text(text),
         SizedBox(height: 5.0),
         TextFormField(
-            validator: (value) =>
-                value!.isEmpty ? "Please enter some text" : null,
+            validator: (val) => val!.isEmpty ? "값을 입력해주세요" : null,
             obscureText: text == "Password" ? true : false,
             decoration: InputDecoration(
               hintText: "Enter $text",
@@ -62,8 +63,45 @@ class SignupForm extends StatelessWidget {
       onPressed: () async {
         if (_signupFormKey.currentState!.validate()) {
           _signupFormKey.currentState!.save();
-          debugPrint('$_name, $_email, $_password 회원가입 시도');
-          Navigator.pushNamed(context, '/home');
+
+          final response = await http
+              .post(Uri.parse('http://10.0.2.2:3000/register'), body: {
+            "email": _email,
+            "name": _name,
+            "route": _profileImage,
+            "pwd": _password
+          });
+          if (response.statusCode == 200) {
+            // 회원가입 성공
+            showDialog(
+                context: context,
+                builder: (context) => AlertDialog(
+                      actions: [
+                        TextButton(
+                            onPressed: () {
+                              Navigator.pushNamed(context, '/login');
+                            },
+                            child: Text('close'))
+                      ],
+                      title: Text('Study With Me'),
+                      content: Text('회원가입 성공!'),
+                    ));
+          } else {
+            // 회원가입 실패
+            showDialog(
+                context: context,
+                builder: (context) => AlertDialog(
+                      actions: [
+                        TextButton(
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                            child: Text('close'))
+                      ],
+                      title: Text('Study With Me'),
+                      content: Text('회원가입 실패 : 계정이 존재합니다'),
+                    ));
+          }
         }
       },
       child: Container(
