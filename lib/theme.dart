@@ -24,7 +24,7 @@ IconThemeData iconThem() {
 AppBarTheme appBarTheme() {
   return AppBarTheme(
       centerTitle: false,
-      color: Colors.green,
+      color: Color(0xff81C77F),
       elevation: 0.0,
       iconTheme: iconThem(),
       titleTextStyle: GoogleFonts.nanumGothic(
@@ -37,7 +37,7 @@ AppBarTheme appBarTheme() {
 BottomNavigationBarThemeData bottomNavigatorTheme() {
   return const BottomNavigationBarThemeData(
     backgroundColor: Colors.white,
-    selectedItemColor: Colors.lime,
+    selectedItemColor: Color(0xff81C77F),
     unselectedItemColor: Colors.black54,
     showUnselectedLabels: true,
   );
@@ -47,19 +47,22 @@ ElevatedButtonThemeData elevatedButtonTheme() {
   return ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
           foregroundColor: Colors.black,
-          backgroundColor: Colors.white,
+          backgroundColor: Color(0xFFECFFE4),
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(0))));
 }
 
-// 테마 적용
 ThemeData theme() {
   return ThemeData(
+    colorScheme: ColorScheme.fromSeed(
+      seedColor: Color(0xFFECFFE4),
+      brightness: Brightness.light, //다크/라이트 모드 선택
+    ),
     scaffoldBackgroundColor: Colors.white,
-    textTheme: textTheme(),
-    appBarTheme: appBarTheme(),
-    bottomNavigationBarTheme: bottomNavigatorTheme(),
-    elevatedButtonTheme: elevatedButtonTheme(),
-    primarySwatch: Colors.lime,
+    //textTheme: textTheme(),
+    //appBarTheme: appBarTheme(),
+    //bottomNavigationBarTheme: bottomNavigatorTheme(),
+    //elevatedButtonTheme: elevatedButtonTheme(),
+    //primarySwatch: Colors.lime,
   );
 }

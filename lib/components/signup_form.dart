@@ -1,12 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:image_picker/image_picker.dart';
 
-class SignupForm extends StatelessWidget {
+class SignupForm extends StatefulWidget {
+  @override
+  State<SignupForm> createState() => _SignupFormState();
+}
+
+class _SignupFormState extends State<SignupForm> {
   final _signupFormKey = GlobalKey<FormState>();
   String _profileImage = '';
   String _name = '';
   String _email = '';
   String _password = '';
+  XFile? image;
 
   @override
   Widget build(BuildContext context) {
