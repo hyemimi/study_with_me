@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:study_with_me/components/appbar.dart';
 import 'package:study_with_me/service/api_service.dart';
-import 'package:study_with_me/sidemenu/sidemenu.dart';
 import 'package:study_with_me/models/coins.dart';
 
 class AlarmScreen extends StatefulWidget {
@@ -22,20 +22,7 @@ class _AlarmScreenState extends State<AlarmScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        drawer: SideMenu(),
-        appBar: AppBar(
-          leading: Builder(
-            builder: (BuildContext context) {
-              return IconButton(
-                icon: Icon(
-                  Icons.menu,
-                  color: Colors.white,
-                ),
-                onPressed: () => Scaffold.of(context).openDrawer(),
-              );
-            },
-          ),
-        ),
+        appBar: CustomAppBar(title: '알람'),
         body: FutureBuilder(
           future: coins,
           builder: (context, AsyncSnapshot snapshot) {

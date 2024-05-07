@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:study_with_me/screens/Schedule_screen.dart';
+import 'package:study_with_me/screens/adminSchedule_screen.dart';
+import 'package:study_with_me/screens/board_screen.dart';
+import 'package:study_with_me/screens/members_screen.dart';
 import 'package:study_with_me/tabs/home_tabs/tabs.dart';
 
 class SideMenu extends StatefulWidget {
@@ -14,41 +18,57 @@ class _SideMenuState extends State<SideMenu> {
         padding: EdgeInsets.zero,
         children: [
           DrawerHeader(
-              child: Text(
-                'drawer',
-                style: TextStyle(color: Colors.white, fontSize: 25),
-              ),
-              decoration: BoxDecoration(color: Colors.white)),
+            child: Center(
+                child: Text(
+              'Study With Me',
+              style: TextStyle(
+                  color: Theme.of(context).primaryColor, fontSize: 25),
+            )),
+          ),
           ListTile(
-            leading: Icon(Icons.home),
-            title: Text('Home'),
-            onTap: () => {
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(builder: (context) => Tabs(selectedIndex: 0)),
-              )
-            },
+            leading: Icon(Icons.people_alt),
+            title: Text('구성원'),
+            onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => MembersScreen(),
+                fullscreenDialog: true,
+              ),
+            ),
           ),
           ListTile(
             leading: Icon(Icons.calendar_month),
-            title: Text('Calender'),
-            onTap: () => {
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(builder: (context) => Tabs(selectedIndex: 1)),
+            title: Text('레퍼런스 게시판'),
+            onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => BoardScreen(),
+                fullscreenDialog: true,
               ),
-            },
+            ),
           ),
           ListTile(
-            leading: Icon(Icons.alarm),
-            title: Text('alarm'),
-            onTap: () => {
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(builder: (context) => Tabs(selectedIndex: 2)),
+            leading: Icon(Icons.library_books_rounded),
+            title: Text('스터디 일정'),
+            onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => ScheduleScreen(),
+                fullscreenDialog: true,
               ),
-            },
+            ),
           ),
+          ListTile(
+            leading: Icon(Icons.edit_calendar_outlined),
+            title: Text('일정 등록'),
+            onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => AdminScheduleScreen(),
+                fullscreenDialog: true,
+              ),
+            ),
+          )
         ],
       ),
     );

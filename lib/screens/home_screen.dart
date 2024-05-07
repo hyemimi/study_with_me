@@ -1,8 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:study_with_me/components/appbar.dart';
 import 'package:study_with_me/components/home_banner.dart';
 import 'package:study_with_me/components/home_header.dart';
+import 'package:study_with_me/screens/add_screen.dart';
 import 'package:study_with_me/screens/detail_screen.dart';
 import 'package:study_with_me/sidemenu/sidemenu.dart';
 import 'package:study_with_me/tabs/home_tabs/tabs.dart';
@@ -16,21 +18,19 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-            automaticallyImplyLeading: false,
-            title: Text('Study With Me',
-                style:
-                    TextStyle(color: Theme.of(context).colorScheme.primary))),
+        appBar: CustomAppBar(title: 'Study With Me'),
         body: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           //HomeBanner(),
           //SizedBox(height: 5),
           Row(mainAxisAlignment: MainAxisAlignment.end, children: [
             TextButton(
-                onPressed: () => Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) =>
-                            DetailScreen())), // 홈 화면 갈 때 email, image route 보내야함
+                onPressed: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => AddScreen(),
+                        fullscreenDialog: true,
+                      ),
+                    ), // 홈 화면 갈 때 email, image route 보내야함
 
                 child: Text("스터디 생성"))
           ]),
