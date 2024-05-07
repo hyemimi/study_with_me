@@ -59,7 +59,7 @@ class LoginForm extends StatelessWidget {
               body: {"email": _email, "pwd": _password});
           if (response.statusCode == 200) {
             // 로그인 성공() async {
-            Navigator.pushNamed(
+            Navigator.pushReplacementNamed(
                 context, '/home'); // 홈 화면 갈 때 email, image route 보내야함
           }
         }
