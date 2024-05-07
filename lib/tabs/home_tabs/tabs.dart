@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:study_with_me/tabs/bottom_tabs.dart';
+import 'package:study_with_me/tabs/home_tabs/bottom_tabs.dart';
 
 class Tabs extends StatefulWidget {
   int selectedIndex = 0;
-
   Tabs({required this.selectedIndex});
 
   @override
@@ -12,6 +11,8 @@ class Tabs extends StatefulWidget {
 
 class _TabsPageState extends State<Tabs> {
   int _selectedIndex = 0;
+  late String _email;
+  late String _route;
 
   // bottom navigation 눌렸을 때
   void _onItemTapped(int index) {
@@ -24,8 +25,8 @@ class _TabsPageState extends State<Tabs> {
 
   @override
   void initState() {
-    _onItemTapped(widget.selectedIndex);
     super.initState();
+    _onItemTapped(widget.selectedIndex);
   }
 
   @override
@@ -53,6 +54,10 @@ class _TabsPageState extends State<Tabs> {
             icon: Icon(Icons.alarm),
             label: 'alarm',
           ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.add),
+            label: 'add',
+          )
         ],
         currentIndex: _selectedIndex,
         onTap: _onItemTapped,

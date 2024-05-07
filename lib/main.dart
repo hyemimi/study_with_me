@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:study_with_me/pages/login_page.dart';
 import 'package:study_with_me/pages/signup_page.dart';
-import 'package:study_with_me/tabs/tabs.dart';
+import 'package:study_with_me/screens/detail_screen.dart';
+import 'package:study_with_me/tabs/home_tabs/tabs.dart';
 import 'package:study_with_me/theme.dart';
 
 void main() {

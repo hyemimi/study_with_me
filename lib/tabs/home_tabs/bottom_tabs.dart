@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:study_with_me/screens/detail_screen.dart';
 import 'package:study_with_me/screens/home_screen.dart';
 import 'package:study_with_me/screens/alarm_screen.dart';
 import 'package:study_with_me/screens/calender_screen.dart';
@@ -28,6 +29,11 @@ class TabNavigationItem {
           page: AlarmScreen(),
           icon: Icon(Icons.alarm),
           title: Text("alarm"),
+        ),
+        TabNavigationItem(
+          page: DetailScreen(),
+          icon: Icon(Icons.add),
+          title: Text("스터디 생성"),
         ),
       ];
 }

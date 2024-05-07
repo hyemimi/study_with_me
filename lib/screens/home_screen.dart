@@ -3,10 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:study_with_me/components/home_banner.dart';
 import 'package:study_with_me/components/home_header.dart';
+import 'package:study_with_me/screens/detail_screen.dart';
 import 'package:study_with_me/sidemenu/sidemenu.dart';
-import 'package:study_with_me/tabs/tabs.dart';
+import 'package:study_with_me/tabs/home_tabs/tabs.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,10 +27,11 @@ class HomeScreen extends StatelessWidget {
           Row(mainAxisAlignment: MainAxisAlignment.end, children: [
             TextButton(
                 onPressed: () => Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => Tabs(selectedIndex: 2)),
-                    ),
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            DetailScreen())), // 홈 화면 갈 때 email, image route 보내야함
+
                 child: Text("스터디 생성"))
           ]),
           Expanded(
@@ -38,12 +45,22 @@ class HomeScreen extends StatelessWidget {
               crossAxisSpacing: 10, //수직 Padding
             ),
             itemBuilder: (BuildContext context, int index) {
-              return Container(
-                color: Theme.of(context).colorScheme.secondary,
-                child: Column(
-                  children: [Text('알고리즘 스터디')],
-                ),
-              );
+              return GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => DetailScreen(),
+                        fullscreenDialog: true,
+                      ),
+                    );
+                  },
+                  child: Container(
+                    color: Theme.of(context).colorScheme.secondary,
+                    child: Column(
+                      children: [Text('알고리즘 스터디')],
+                    ),
+                  ));
             },
           )))
         ]));

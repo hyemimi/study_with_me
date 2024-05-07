@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:study_with_me/tabs/home_tabs/tabs.dart';
 
 class LoginForm extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
@@ -57,8 +58,9 @@ class LoginForm extends StatelessWidget {
               Uri.parse('http://10.0.2.2:3000/login'),
               body: {"email": _email, "pwd": _password});
           if (response.statusCode == 200) {
-            // 로그인 성공
-            Navigator.pushNamed(context, '/home');
+            // 로그인 성공() async {
+            Navigator.pushNamed(
+                context, '/home'); // 홈 화면 갈 때 email, image route 보내야함
           }
         }
       },

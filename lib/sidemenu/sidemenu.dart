@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:study_with_me/tabs/tabs.dart';
+import 'package:study_with_me/tabs/home_tabs/tabs.dart';
 
 class SideMenu extends StatefulWidget {
   @override
