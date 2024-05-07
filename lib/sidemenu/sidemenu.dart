@@ -28,7 +28,7 @@ class _SideMenuState extends State<SideMenu> {
           ListTile(
             leading: Icon(Icons.people_alt),
             title: Text('구성원'),
-            onTap: () => Navigator.push(
+            onTap: () => Navigator.pushReplacement(
               context,
               MaterialPageRoute(
                 builder: (context) => MembersScreen(),
@@ -39,7 +39,7 @@ class _SideMenuState extends State<SideMenu> {
           ListTile(
             leading: Icon(Icons.calendar_month),
             title: Text('레퍼런스 게시판'),
-            onTap: () => Navigator.push(
+            onTap: () => Navigator.pushReplacement(
               context,
               MaterialPageRoute(
                 builder: (context) => BoardScreen(),
@@ -50,7 +50,7 @@ class _SideMenuState extends State<SideMenu> {
           ListTile(
             leading: Icon(Icons.library_books_rounded),
             title: Text('스터디 일정'),
-            onTap: () => Navigator.push(
+            onTap: () => Navigator.pushReplacement(
               context,
               MaterialPageRoute(
                 builder: (context) => ScheduleScreen(),
@@ -61,7 +61,7 @@ class _SideMenuState extends State<SideMenu> {
           ListTile(
             leading: Icon(Icons.edit_calendar_outlined),
             title: Text('일정 등록'),
-            onTap: () => Navigator.push(
+            onTap: () => Navigator.pushReplacement(
               context,
               MaterialPageRoute(
                 builder: (context) => AdminScheduleScreen(),
