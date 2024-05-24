@@ -24,9 +24,19 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       appBar: CustomAppBar(title: 'Study With Me'),
       body: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-        Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [Text(_userProvider.name)]), // 프로필
+        SizedBox(height: 10),
+        Row(mainAxisAlignment: MainAxisAlignment.end, children: [
+          SizedBox(
+            width: 40,
+            height: 40,
+            child: CircleAvatar(
+                backgroundImage: NetworkImage(_userProvider.route)),
+          ),
+          SizedBox(width: 10),
+          Text(_userProvider.name),
+          SizedBox(width: 10),
+        ]), // 프로필
+        SizedBox(height: 10),
         HomeBanner(),
         SizedBox(height: 10),
         Expanded(

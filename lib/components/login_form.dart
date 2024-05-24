@@ -55,6 +55,7 @@ class LoginForm extends StatelessWidget {
   // 폼 제출 버튼 위젯
   Widget submitButton(BuildContext context) {
     UserProvider _userProvider = Provider.of<UserProvider>(context);
+
     return ElevatedButton(
       onPressed: () async {
         if (_formKey.currentState!.validate()) {
@@ -64,8 +65,6 @@ class LoginForm extends StatelessWidget {
               Uri.parse('http://10.0.2.2:3000/login'),
               body: {"email": _email, "pwd": _password});
           if (response.statusCode == 200) {
-            // 로그인 성공() async {
-            //final dynamic user = ;
             final user = UserModel.fromJson(jsonDecode(response.body));
 
             // 전역 상태 관리 set
