@@ -1,5 +1,10 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
+import 'package:study_with_me/models/user.dart';
+import 'package:study_with_me/provider/user_provider.dart';
 import 'package:study_with_me/tabs/home_tabs/tabs.dart';
 
 class LoginForm extends StatelessWidget {
@@ -49,6 +54,7 @@ class LoginForm extends StatelessWidget {
 
   // 폼 제출 버튼 위젯
   Widget submitButton(BuildContext context) {
+    UserProvider _userProvider = Provider.of<UserProvider>(context);
     return ElevatedButton(
       onPressed: () async {
         if (_formKey.currentState!.validate()) {
@@ -59,6 +65,14 @@ class LoginForm extends StatelessWidget {
               body: {"email": _email, "pwd": _password});
           if (response.statusCode == 200) {
             // 로그인 성공() async {
+            //final dynamic user = ;
+            final user = UserModel.fromJson(jsonDecode(response.body));
+
+            // 전역 상태 관리 set
+            _userProvider.name = user.name;
+            _userProvider.email = user.email;
+            _userProvider.route = user.route;
+            _userProvider.user_id = user.user_id;
             Navigator.pushReplacementNamed(
                 context, '/home'); // 홈 화면 갈 때 email, image route 보내야함
           }

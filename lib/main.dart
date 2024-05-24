@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:study_with_me/pages/login_page.dart';
 import 'package:study_with_me/pages/signup_page.dart';
+import 'package:study_with_me/provider/user_provider.dart';
 import 'package:study_with_me/screens/detail_screen.dart';
 import 'package:study_with_me/tabs/home_tabs/tabs.dart';
 import 'package:study_with_me/theme.dart';
@@ -15,17 +17,20 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        title: 'Flutter Demo',
-        debugShowCheckedModeBanner: false,
-        theme: theme(),
-        initialRoute: "/login",
-        routes: {
-          "/login": (context) => LoginPage(),
-          "/signup": (context) => SignupPage(),
-          "/home": (context) => Tabs(
-                selectedIndex: 0,
-              )
-        });
+    return ChangeNotifierProvider(
+      create: (_) => UserProvider(),
+      child: MaterialApp(
+          title: 'Flutter Demo',
+          debugShowCheckedModeBanner: false,
+          theme: theme(),
+          initialRoute: "/login",
+          routes: {
+            "/login": (context) => LoginPage(),
+            "/signup": (context) => SignupPage(),
+            "/home": (context) => Tabs(
+                  selectedIndex: 0,
+                )
+          }),
+    );
   }
 }

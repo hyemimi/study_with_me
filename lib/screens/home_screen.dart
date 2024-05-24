@@ -1,8 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:provider/provider.dart';
 import 'package:study_with_me/components/home_appbar.dart';
 import 'package:study_with_me/components/home_banner.dart';
+import 'package:study_with_me/provider/user_provider.dart';
 import 'package:study_with_me/screens/add_screen.dart';
 import 'package:study_with_me/screens/detail_screen.dart';
 
@@ -13,12 +15,18 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  // 프로바이더 인스턴스 생성
+  late UserProvider _userProvider =
+      Provider.of<UserProvider>(context); // 프로바이더 사용
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(title: 'Study With Me'),
       body: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-        Row(mainAxisAlignment: MainAxisAlignment.end, children: []), // 프로필
+        Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [Text(_userProvider.name)]), // 프로필
         HomeBanner(),
         SizedBox(height: 10),
         Expanded(
