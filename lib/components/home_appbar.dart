@@ -10,8 +10,13 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
         automaticallyImplyLeading: false,
-        title: Text(title,
-            style: TextStyle(color: Theme.of(context).colorScheme.primary)));
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset('assets/logoImage.png', width: 30, height: 30),
+            Text(title, style: TextStyle(color: Colors.black)),
+          ],
+        ));
   }
 
   // appbar 사이즈 조절

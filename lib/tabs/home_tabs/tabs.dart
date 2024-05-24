@@ -54,10 +54,6 @@ class _TabsPageState extends State<Tabs> {
             icon: Icon(Icons.alarm),
             label: 'alarm',
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.add),
-            label: 'add',
-          )
         ],
         currentIndex: _selectedIndex,
         onTap: _onItemTapped,

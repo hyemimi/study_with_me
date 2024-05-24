@@ -31,10 +31,5 @@ class TabNavigationItem {
           icon: Icon(Icons.alarm),
           title: Text("alarm"),
         ),
-        TabNavigationItem(
-          page: AddScreen(),
-          icon: Icon(Icons.add),
-          title: Text("스터디 생성"),
-        ),
       ];
 }
