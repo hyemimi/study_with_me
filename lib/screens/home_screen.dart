@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:study_with_me/components/home_appbar.dart';
+import 'package:study_with_me/components/home_banner.dart';
 import 'package:study_with_me/screens/add_screen.dart';
 import 'package:study_with_me/screens/detail_screen.dart';
 
@@ -18,6 +19,8 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: CustomAppBar(title: 'Study With Me'),
       body: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
         Row(mainAxisAlignment: MainAxisAlignment.end, children: []), // 프로필
+        HomeBanner(),
+        SizedBox(height: 10),
         Expanded(
             child: (GridView.builder(
           shrinkWrap: true,

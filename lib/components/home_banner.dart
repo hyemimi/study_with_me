@@ -9,7 +9,7 @@ class HomeBanner extends StatelessWidget {
       decoration: BoxDecoration(
         image: DecorationImage(
           fit: BoxFit.cover,
-          image: AssetImage('assets/studywithme.png'),
+          image: AssetImage('assets/bookBanner.jpg'),
         ),
       ),
     );

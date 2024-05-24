@@ -66,6 +66,7 @@ flutter:
   assets:
     - assets/studywithme.png
     - assets/logoImage.png
+    - assets/bookBanner.jpg
 
   # To add assets to your application, add an assets section, like this:
   # assets:
