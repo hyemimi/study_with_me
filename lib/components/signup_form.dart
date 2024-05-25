@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
@@ -9,11 +10,25 @@ class SignupForm extends StatefulWidget {
 
 class _SignupFormState extends State<SignupForm> {
   final _signupFormKey = GlobalKey<FormState>();
-  String _profileImage = '';
+  String _route = '';
   String _name = '';
   String _email = '';
   String _password = '';
-  XFile? image;
+  XFile? _image;
+
+  final ImagePicker picker = ImagePicker();
+
+  Future getImage(ImageSource imageSource) async {
+    final XFile? pickedFile = await picker.pickImage(source: imageSource);
+    if (pickedFile != null) {
+      setState(() {
+        _route = pickedFile.path;
+        _image = XFile(pickedFile.path); //가져온 이미지를 _image에 저장
+      });
+      //가져온 이미지를 _image에 저장
+    }
+    ;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -21,8 +36,10 @@ class _SignupFormState extends State<SignupForm> {
         key: _signupFormKey,
         child: Column(
           children: [
-            Icon(Icons.person_pin_sharp, size: 100),
-            SizedBox(height: 20),
+            // IconButton(
+            //     onPressed: onPressed,
+            //     icon: Icon(Icons.person_pin_sharp, size: 100)),
+            buildPhotoArea(), SizedBox(height: 20),
             SizedBox(height: 5.0),
             CustomTextFormField("Name"),
             SizedBox(height: 10),
@@ -38,6 +55,27 @@ class _SignupFormState extends State<SignupForm> {
             )
           ],
         ));
+  }
+
+  Widget buildPhotoArea() {
+    return _image != null
+        ? GestureDetector(
+            onTap: () => getImage(ImageSource.gallery),
+            child: SizedBox(
+              width: 150,
+              height: 150,
+              child:
+                  CircleAvatar(backgroundImage: FileImage(File(_image!.path))),
+            ),
+          )
+        : GestureDetector(
+            onTap: () => getImage(ImageSource.gallery),
+            child: Container(
+              decoration: BoxDecoration(
+                  color: Colors.grey, borderRadius: BorderRadius.circular(150)),
+              width: 150,
+              height: 150,
+            ));
   }
 
   // input
@@ -75,7 +113,7 @@ class _SignupFormState extends State<SignupForm> {
               .post(Uri.parse('http://10.0.2.2:3000/register'), body: {
             "email": _email,
             "name": _name,
-            "route": _profileImage,
+            "route": _route,
             "pwd": _password
           });
           if (response.statusCode == 200) {

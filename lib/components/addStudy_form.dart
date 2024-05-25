@@ -111,8 +111,8 @@ class _addStudyFormState extends State<addStudyForm> {
         dio.options.contentType = 'multipart/form-data';
         dio.options.maxRedirects.isFinite;
 
-        var response =
-            await dio.post('http://10.0.2.2:3000/banner', data: input);
+        var response = await dio.post('http://10.0.2.2:3000/study/postBanner',
+            data: input);
         print('성공적으로 업로드했습니다');
         return response.data;
       } catch (e) {
