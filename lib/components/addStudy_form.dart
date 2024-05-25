@@ -1,8 +1,9 @@
 import 'dart:convert';
+//import 'dart:html';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
-import 'package:study_with_me/models/user.dart';
 import 'package:study_with_me/provider/user_provider.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
@@ -103,6 +104,22 @@ class _addStudyFormState extends State<addStudyForm> {
   Widget submitButton(BuildContext context) {
     UserProvider _UserProvider = Provider.of<UserProvider>(context);
 
+    Future<dynamic> patchUserProfileImage(dynamic input) async {
+      print("프로필 사진을 서버에 업로드 합니다.");
+      var dio = new Dio();
+      try {
+        dio.options.contentType = 'multipart/form-data';
+        dio.options.maxRedirects.isFinite;
+
+        var response =
+            await dio.post('http://10.0.2.2:3000/banner', data: input);
+        print('성공적으로 업로드했습니다');
+        return response.data;
+      } catch (e) {
+        print(e);
+      }
+    }
+
     return ElevatedButton(
       onPressed: () async {
         if (addStudyFormKey.currentState!.validate()) {
@@ -111,15 +128,26 @@ class _addStudyFormState extends State<addStudyForm> {
             "leader_id": _UserProvider.user_id,
             "title": _title,
             "description": _description,
-            "banner": _banner
           };
           body = jsonEncode(body);
 
+          // 스터디 생성
           final response = await http.post(
               Uri.parse('http://10.0.2.2:3000/study/addStudies'),
               headers: {"Content-Type": "application/json"},
               body: body);
           if (response.statusCode == 200) {
+            // 서버에 이미지 업로드
+
+            if (_banner != "") {
+              var formData = FormData.fromMap({
+                'image': await MultipartFile.fromFile(_banner),
+                'invite_code': response.body
+              });
+              print(response.body);
+              patchUserProfileImage(formData);
+            }
+
             showDialog(
                 context: context,
                 builder: (_) {
