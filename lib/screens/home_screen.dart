@@ -30,7 +30,8 @@ class _HomeScreenState extends State<HomeScreen> {
             width: 40,
             height: 40,
             child: CircleAvatar(
-                backgroundImage: NetworkImage(_userProvider.route)),
+                backgroundImage: NetworkImage(
+                    'http://10.0.2.2:3000/resources/profileImage/${_userProvider.route}')),
           ),
           SizedBox(width: 10),
           Text(_userProvider.name),

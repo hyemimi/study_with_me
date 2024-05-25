@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
@@ -104,20 +105,42 @@ class _SignupFormState extends State<SignupForm> {
 
   // 폼 제출 버튼 위젯
   Widget submitButton(BuildContext context) {
+    Future<dynamic> patchUserProfileImage(dynamic input) async {
+      print("프로필 사진을 서버에 업로드 합니다.");
+      var dio = new Dio();
+      try {
+        dio.options.contentType = 'multipart/form-data';
+        dio.options.maxRedirects.isFinite;
+
+        var response =
+            await dio.post('http://10.0.2.2:3000/uploadProfile', data: input);
+        print('성공적으로 업로드했습니다');
+        return response.data;
+      } catch (e) {
+        print(e);
+      }
+    }
+
     return ElevatedButton(
       onPressed: () async {
         if (_signupFormKey.currentState!.validate()) {
           _signupFormKey.currentState!.save();
 
-          final response = await http
-              .post(Uri.parse('http://10.0.2.2:3000/register'), body: {
-            "email": _email,
-            "name": _name,
-            "route": _route,
-            "pwd": _password
-          });
+          final response = await http.post(
+              Uri.parse('http://10.0.2.2:3000/register'),
+              body: {"email": _email, "name": _name, "pwd": _password});
           if (response.statusCode == 200) {
             // 회원가입 성공
+            if (_image != null) {
+              // 프로필 이미지가 있다면 이미지 업로드
+              var formData = FormData.fromMap({
+                'image': await MultipartFile.fromFile(_route),
+                'user_id': response.body
+              });
+              //print(response.body);
+              patchUserProfileImage(formData);
+            }
+
             showDialog(
                 context: context,
                 builder: (context) => AlertDialog(
