@@ -96,21 +96,41 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   itemBuilder: (BuildContext context, int index) {
                     return GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => DetailScreen(),
-                              fullscreenDialog: true,
-                            ),
-                          );
-                        },
-                        child: Container(
-                          color: Theme.of(context).colorScheme.secondary,
-                          child: Column(
-                            children: [Text('${studies![index].title}')],
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => DetailScreen(),
+                            fullscreenDialog: true,
                           ),
-                        ));
+                        );
+                      },
+                      child: Stack(
+                        children: [
+                          Positioned(
+                            child: Container(
+                              child: Image.network(
+                                  'http://10.0.2.2:3000/resources/banner/${studies![index].banner}',
+                                  fit: BoxFit.cover,
+                                  width: 200,
+                                  height: 250),
+                            ),
+                          ),
+                          Positioned.fill(
+                              child: Align(
+                                  alignment: Alignment.center,
+                                  child: Container(
+                                    color: Colors.white.withOpacity(0.6),
+                                    child: Text(
+                                      studies![index].title,
+                                      style: TextStyle(
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.w600),
+                                    ),
+                                  )))
+                        ],
+                      ),
+                    );
                   },
                 ),
         )
