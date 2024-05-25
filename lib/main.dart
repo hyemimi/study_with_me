@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:study_with_me/candy_global_variable.dart';
 import 'package:study_with_me/pages/login_page.dart';
 import 'package:study_with_me/pages/signup_page.dart';
 import 'package:study_with_me/provider/user_provider.dart';
@@ -20,6 +21,7 @@ class MyApp extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (_) => UserProvider(),
       child: MaterialApp(
+          navigatorKey: CandyGlobalVariable.naviagatorState,
           title: 'Flutter Demo',
           debugShowCheckedModeBanner: false,
           theme: theme(),

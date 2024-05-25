@@ -5,6 +5,7 @@ import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 import 'package:study_with_me/models/user.dart';
 import 'package:study_with_me/provider/user_provider.dart';
+import 'package:study_with_me/screens/home_screen.dart';
 import 'package:study_with_me/tabs/home_tabs/tabs.dart';
 
 class LoginForm extends StatelessWidget {
@@ -72,8 +73,10 @@ class LoginForm extends StatelessWidget {
             _userProvider.email = user.email;
             _userProvider.route = user.route;
             _userProvider.user_id = user.user_id;
-            Navigator.pushReplacementNamed(
-                context, '/home'); // 홈 화면 갈 때 email, image route 보내야함
+            Navigator.pushReplacementNamed(context, '/home');
+            // Navigator.pushReplacementNamed(context, '/home', arguments: {
+            //   "user_id": user.user_id
+            // }); // 홈 화면 갈 때 email, image route 보내야함
           }
         }
       },

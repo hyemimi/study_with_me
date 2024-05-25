@@ -11,33 +11,35 @@ class AlarmScreen extends StatefulWidget {
 }
 
 class _AlarmScreenState extends State<AlarmScreen> {
-  late Future<List<WebtoonModel>> coins;
+  //late Future<List<WebtoonModel>> coins;
 
   @override
   void initState() {
     super.initState();
-    coins = ApiService().getCoins();
+    //coins = ApiService().getCoins();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: CustomAppBar(title: '알람'),
-        body: FutureBuilder(
-          future: coins,
-          builder: (context, AsyncSnapshot snapshot) {
-            print(snapshot);
-            if (snapshot.hasData) {
-              return Center(
-                  child: ListView.builder(itemBuilder: (context, index) {
-                var coin = snapshot.data![index];
-                return Text(coin.title);
-              }));
-            }
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          },
-        ));
+      appBar: CustomAppBar(title: '알람'),
+      body: Text('알람'),
+      // body: FutureBuilder(
+      //   future: coins,
+      //   builder: (context, AsyncSnapshot snapshot) {
+      //     print(snapshot);
+      //     if (snapshot.hasData) {
+      //       return Center(
+      //           child: ListView.builder(itemBuilder: (context, index) {
+      //         var coin = snapshot.data![index];
+      //         return Text(coin.title);
+      //       }));
+      //     }
+      //     return const Center(
+      //       child: CircularProgressIndicator(),
+      //     );
+      //   },
+      // ));
+    );
   }
 }

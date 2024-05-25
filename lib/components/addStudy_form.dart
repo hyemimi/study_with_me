@@ -8,6 +8,8 @@ import 'package:study_with_me/provider/user_provider.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 
+import 'package:study_with_me/screens/home_screen.dart';
+
 class addStudyForm extends StatefulWidget {
   @override
   State<addStudyForm> createState() => _addStudyFormState();
@@ -157,7 +159,13 @@ class _addStudyFormState extends State<addStudyForm> {
                       content: Text('$_title 스터디가 생성 되었습니다!'),
                       actions: [
                         TextButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => HomeScreen()))
+                                .then((value) => setState(() {}));
+                          },
                           child: Text('유저 초대'),
                         ),
                       ]);
