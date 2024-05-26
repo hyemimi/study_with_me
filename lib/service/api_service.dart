@@ -61,7 +61,6 @@ class ApiService {
       for (var study in studies) {
         studyInstances.add(StudyModel.fromJson(study));
       }
-      print(studyInstances.length);
       return studyInstances;
     }
     throw Error();
