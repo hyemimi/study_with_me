@@ -11,7 +11,7 @@ class DetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        drawer: SideMenu(),
+        drawer: SideMenu(study: study),
         appBar: AppBar(
           title: Text('${study.title}'),
           leading: Builder(

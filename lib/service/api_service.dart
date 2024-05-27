@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:study_with_me/models/coins.dart';
 import 'package:http/http.dart' as http;
 import 'package:study_with_me/models/study.dart';
+import 'package:study_with_me/models/user.dart';
 import 'package:study_with_me/provider/user_provider.dart';
 
 class ApiService {
@@ -62,6 +63,23 @@ class ApiService {
         studyInstances.add(StudyModel.fromJson(study));
       }
       return studyInstances;
+    }
+    throw Error();
+  }
+
+  /** 유저가 속한 스터디 멤버들을 조회합니다 */
+  Future<List<UserModel>> getMembers(String invite_code) async {
+    List<UserModel> memberInstances = [];
+    final response = await http.get(Uri.parse(
+        'http://10.0.2.2:3000/study/getMembers?invite_code=${invite_code}'));
+    print(response.body);
+
+    if (response.statusCode == 200) {
+      final List<dynamic> users = jsonDecode(response.body);
+      for (var user in users) {
+        memberInstances.add(UserModel.fromJson(user));
+      }
+      return memberInstances;
     }
     throw Error();
   }

@@ -5,7 +5,13 @@ import 'package:study_with_me/screens/board_screen.dart';
 import 'package:study_with_me/screens/members_screen.dart';
 import 'package:study_with_me/tabs/home_tabs/tabs.dart';
 
+import '../models/study.dart';
+
 class SideMenu extends StatefulWidget {
+  StudyModel study;
+
+  SideMenu({required this.study});
+
   @override
   _SideMenuState createState() => _SideMenuState();
 }
@@ -31,7 +37,7 @@ class _SideMenuState extends State<SideMenu> {
             onTap: () => Navigator.pushReplacement(
               context,
               MaterialPageRoute(
-                builder: (context) => MembersScreen(),
+                builder: (context) => MembersScreen(study: widget.study),
                 fullscreenDialog: true,
               ),
             ),
@@ -42,7 +48,7 @@ class _SideMenuState extends State<SideMenu> {
             onTap: () => Navigator.pushReplacement(
               context,
               MaterialPageRoute(
-                builder: (context) => BoardScreen(),
+                builder: (context) => BoardScreen(study: widget.study),
                 fullscreenDialog: true,
               ),
             ),
@@ -53,7 +59,7 @@ class _SideMenuState extends State<SideMenu> {
             onTap: () => Navigator.pushReplacement(
               context,
               MaterialPageRoute(
-                builder: (context) => ScheduleScreen(),
+                builder: (context) => ScheduleScreen(study: widget.study),
                 fullscreenDialog: true,
               ),
             ),
@@ -64,7 +70,7 @@ class _SideMenuState extends State<SideMenu> {
             onTap: () => Navigator.pushReplacement(
               context,
               MaterialPageRoute(
-                builder: (context) => AdminScheduleScreen(),
+                builder: (context) => AdminScheduleScreen(study: widget.study),
                 fullscreenDialog: true,
               ),
             ),

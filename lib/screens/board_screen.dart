@@ -1,11 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:study_with_me/sidemenu/sidemenu.dart';
 
-class BoardScreen extends StatelessWidget {
+import '../models/study.dart';
+
+class BoardScreen extends StatefulWidget {
+  StudyModel study;
+
+  BoardScreen({required this.study});
+  @override
+  State<BoardScreen> createState() => _BoardScreenState();
+}
+
+class _BoardScreenState extends State<BoardScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        drawer: SideMenu(),
+        drawer: SideMenu(study: widget.study),
         appBar: AppBar(
           leading: Builder(
             builder: (BuildContext context) {
