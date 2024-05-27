@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
+import 'package:study_with_me/models/board.dart';
 import 'package:study_with_me/models/coins.dart';
 import 'package:http/http.dart' as http;
 import 'package:study_with_me/models/study.dart';
@@ -80,6 +81,23 @@ class ApiService {
         memberInstances.add(UserModel.fromJson(user));
       }
       return memberInstances;
+    }
+    throw Error();
+  }
+
+  /** 유저가 속한 스터디의 게시글들을 조회합니다 */
+  Future<List<BoardModel>> getBoard(String invite_code) async {
+    List<BoardModel> boardInstances = [];
+    final response = await http.get(Uri.parse(
+        'http://10.0.2.2:3000/study/getBoard?invite_code=${invite_code}'));
+    print(response.body);
+
+    if (response.statusCode == 200) {
+      final List<dynamic> boards = jsonDecode(response.body);
+      for (var board in boards) {
+        boardInstances.add(BoardModel.fromJson(board));
+      }
+      return boardInstances;
     }
     throw Error();
   }

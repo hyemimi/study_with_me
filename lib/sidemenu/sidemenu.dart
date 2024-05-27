@@ -1,4 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:study_with_me/provider/user_provider.dart';
 import 'package:study_with_me/screens/Schedule_screen.dart';
 import 'package:study_with_me/screens/adminSchedule_screen.dart';
 import 'package:study_with_me/screens/board_screen.dart';
@@ -19,6 +22,9 @@ class SideMenu extends StatefulWidget {
 class _SideMenuState extends State<SideMenu> {
   @override
   Widget build(BuildContext context) {
+    UserProvider _userProvider = Provider.of<UserProvider>(context);
+    var user_id = _userProvider.user_id;
+
     return Drawer(
       child: ListView(
         padding: EdgeInsets.zero,
@@ -64,17 +70,19 @@ class _SideMenuState extends State<SideMenu> {
               ),
             ),
           ),
-          ListTile(
-            leading: Icon(Icons.edit_calendar_outlined),
-            title: Text('일정 등록'),
-            onTap: () => Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(
-                builder: (context) => AdminScheduleScreen(study: widget.study),
-                fullscreenDialog: true,
+          if (widget.study.leader_id == user_id)
+            ListTile(
+              leading: Icon(Icons.edit_calendar_outlined),
+              title: Text('일정 등록'),
+              onTap: () => Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                  builder: (context) =>
+                      AdminScheduleScreen(study: widget.study),
+                  fullscreenDialog: true,
+                ),
               ),
-            ),
-          )
+            )
         ],
       ),
     );
