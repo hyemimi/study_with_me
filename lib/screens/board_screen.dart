@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:study_with_me/models/board.dart';
+import 'package:study_with_me/screens/boardContent_screen.dart';
 import 'package:study_with_me/screens/uploadBoard_screen.dart';
 import 'package:study_with_me/service/api_service.dart';
 import 'package:study_with_me/sidemenu/sidemenu.dart';
@@ -57,7 +58,7 @@ class _BoardScreenState extends State<BoardScreen> {
                           MaterialPageRoute(
                             builder: (context) =>
                                 UploadBoardScreen(study: widget.study),
-                            fullscreenDialog: true,
+                            //fullscreenDialog: true,
                           ),
                         ),
                     child: Text("작성하기"))),
@@ -67,39 +68,47 @@ class _BoardScreenState extends State<BoardScreen> {
                 itemBuilder: (context, index) {
                   var board = boards![index];
                   return boards.length > 0
-                      ? Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            SizedBox(
-                                width: 200,
-                                child: Text(board.title,
-                                    style: TextStyle(fontSize: 18),
-                                    textAlign: TextAlign.start)),
-                            //SizedBox(width: 150),
-                            Column(
-                              children: [
-                                SizedBox(
-                                    child: Text(
-                                        DateFormat('yyyy-MM-dd')
-                                            .format(DateTime.parse(board.time)),
-                                        textAlign: TextAlign.center)),
-                                Row(children: [
+                      ? GestureDetector(
+                          onTap: () => Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    BoardContentScreen(board: boards![index]),
+                                fullscreenDialog: true,
+                              )),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              SizedBox(
+                                  width: 200,
+                                  child: Text(board.title,
+                                      style: TextStyle(fontSize: 18),
+                                      textAlign: TextAlign.start)),
+                              //SizedBox(width: 150),
+                              Column(
+                                children: [
                                   SizedBox(
-                                    width: 25,
-                                    height: 25,
-                                    child: CircleAvatar(
-                                        backgroundImage: NetworkImage(
-                                            'http://10.0.2.2:3000/resources/profileImage/${board.route}')),
-                                  ),
-                                  SizedBox(width: 10),
-                                  Text(
-                                    board.name,
-                                  )
-                                ])
-                              ],
-                            ),
-                          ],
-                        )
+                                      child: Text(
+                                          DateFormat('yyyy-MM-dd').format(
+                                              DateTime.parse(board.time)),
+                                          textAlign: TextAlign.center)),
+                                  Row(children: [
+                                    SizedBox(
+                                      width: 25,
+                                      height: 25,
+                                      child: CircleAvatar(
+                                          backgroundImage: NetworkImage(
+                                              'http://10.0.2.2:3000/resources/profileImage/${board.route}')),
+                                    ),
+                                    SizedBox(width: 10),
+                                    Text(
+                                      board.name,
+                                    )
+                                  ])
+                                ],
+                              ),
+                            ],
+                          ))
                       : Text("게시물이 없습니다");
                 },
                 separatorBuilder: (context, index) => const Divider(
