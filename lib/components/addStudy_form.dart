@@ -7,7 +7,6 @@ import 'package:provider/provider.dart';
 import 'package:study_with_me/provider/user_provider.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
-
 import 'package:study_with_me/screens/home_screen.dart';
 
 class addStudyForm extends StatefulWidget {

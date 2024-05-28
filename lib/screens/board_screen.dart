@@ -55,7 +55,8 @@ class _BoardScreenState extends State<BoardScreen> {
                     onPressed: () => Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => UploadBoardScreen(),
+                            builder: (context) =>
+                                UploadBoardScreen(study: widget.study),
                             fullscreenDialog: true,
                           ),
                         ),
