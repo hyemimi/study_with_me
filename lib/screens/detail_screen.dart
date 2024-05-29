@@ -31,7 +31,7 @@ class DetailScreen extends StatelessWidget {
             Container(
               child: Center(
                 child: Image.network(
-                  'http://10.0.2.2:3000/resources/profileImage/user.png',
+                  'http://10.0.2.2:3000/resources/banner/${study.banner}',
                   width: 360,
                   height: 300,
                   fit: BoxFit.cover,

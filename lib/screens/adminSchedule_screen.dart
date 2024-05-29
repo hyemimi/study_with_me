@@ -1,9 +1,11 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:study_with_me/models/study.dart';
+import 'package:study_with_me/screens/detail_screen.dart';
 import 'package:study_with_me/sidemenu/sidemenu.dart';
-import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
+import 'package:http/http.dart' as http;
 
 class AdminScheduleScreen extends StatefulWidget {
   @override
@@ -17,6 +19,7 @@ class _AdminScheduleScreenState extends State<AdminScheduleScreen> {
   late int hour, minutes;
   int during = 0;
   String location = '';
+
   // time 배열로 넘겨야 함 TimeModel 만들기
 
   @override
@@ -45,6 +48,49 @@ class _AdminScheduleScreenState extends State<AdminScheduleScreen> {
           selectedDateTimes.add(DateTimeField.combine(date, time));
         });
       }
+    }
+  }
+
+  void submitTimes() async {
+    var selectedDateTimesString = [];
+
+    selectedDateTimes.forEach((element) {
+      selectedDateTimesString.add(element?.toIso8601String());
+    });
+
+    dynamic body = {
+      "invite_code": widget.study.invite_code,
+      "during": during.toString(),
+      "location": location,
+      "selectedDateTimes": selectedDateTimesString
+    };
+    body = jsonEncode(body);
+
+    // 스터디 생성
+    final response = await http.post(
+        Uri.parse('http://10.0.2.2:3000/study/registerSchedule'),
+        headers: {"Content-Type": "application/json"},
+        body: body);
+    if (response.statusCode == 200) {
+      // 서버에 이미지 업로드
+      showDialog(
+          context: context,
+          builder: (_) {
+            //clickPayment();
+            return AlertDialog(content: Text('일정이 등록되었습니다'), actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  DetailScreen(study: widget.study)))
+                      .then((value) => setState(() {}));
+                },
+                child: Text('확인'),
+              ),
+            ]);
+          });
     }
   }
 
@@ -210,6 +256,9 @@ class _AdminScheduleScreenState extends State<AdminScheduleScreen> {
                   },
                 ),
               ),
+              Center(
+                  child: ElevatedButton(
+                      onPressed: submitTimes, child: Text("등록하기")))
             ],
           ),
         ));

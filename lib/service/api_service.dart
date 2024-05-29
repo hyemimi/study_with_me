@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
+import 'package:study_with_me/models/alarm.dart';
 import 'package:study_with_me/models/board.dart';
 import 'package:study_with_me/models/coins.dart';
 import 'package:http/http.dart' as http;
@@ -98,6 +99,23 @@ class ApiService {
         boardInstances.add(BoardModel.fromJson(board));
       }
       return boardInstances;
+    }
+    throw Error();
+  }
+
+  /** 유저에게 온 알람을 확인합니다 */
+  Future<List<AlarmModel>> getNotification(int user_id) async {
+    List<AlarmModel> alarmInstances = [];
+    final response = await http.get(Uri.parse(
+        'http://10.0.2.2:3000/study/getNotification?user_id=${user_id.toString()}'));
+    print(response.body);
+
+    if (response.statusCode == 200) {
+      final List<dynamic> alarms = jsonDecode(response.body);
+      for (var alarm in alarms) {
+        alarmInstances.add(AlarmModel.fromJson(alarm));
+      }
+      return alarmInstances;
     }
     throw Error();
   }
