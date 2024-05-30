@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:study_with_me/candy_global_variable.dart';
 import 'package:study_with_me/provider/user_provider.dart';
 import 'package:study_with_me/screens/Schedule_screen.dart';
+import 'package:study_with_me/screens/addUser_screen.dart';
 import 'package:study_with_me/screens/adminSchedule_screen.dart';
 import 'package:study_with_me/screens/board_screen.dart';
 import 'package:study_with_me/screens/members_screen.dart';
@@ -99,7 +100,22 @@ class _SideMenuState extends State<SideMenu> {
                 )
               : ListTile(
                   leading: SizedBox(),
+                ),
+          isLeader
+              ? ListTile(
+                  leading: Icon(Icons.edit_calendar_outlined),
+                  title: Text('유저 초대'),
+                  onTap: () => Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => AddUserScreen(
+                          invite_code: widget.study.invite_code,
+                          title: widget.study.title),
+                      fullscreenDialog: true,
+                    ),
+                  ),
                 )
+              : ListTile(leading: SizedBox()),
         ],
       ),
     );

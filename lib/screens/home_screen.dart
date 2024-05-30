@@ -11,6 +11,7 @@ import 'package:study_with_me/provider/user_provider.dart';
 import 'package:study_with_me/screens/add_screen.dart';
 import 'package:study_with_me/screens/detail_screen.dart';
 import 'package:study_with_me/service/api_service.dart';
+import 'package:http/http.dart' as http;
 
 // 홈 화면. 로그인 후 넘어온 email을 기반으로, 유저의 스터디 리스트를 fetch해옴.
 class HomeScreen extends StatefulWidget {
@@ -39,6 +40,14 @@ class _HomeScreenState extends State<HomeScreen> {
     waitForStudies();
   }
 
+  void logout() async {
+    final response = await http.get(Uri.parse('http://10.0.2.2:3000/logout'));
+    print("****************${response.statusCode}");
+    if (response.statusCode == 200) {
+      Navigator.pushNamed(context, '/login').then((value) => setState(() {}));
+    }
+  }
+
   // 프로바이더 인스턴스 생성
   @override
   Widget build(BuildContext context) {
@@ -49,6 +58,7 @@ class _HomeScreenState extends State<HomeScreen> {
       body: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
         SizedBox(height: 10),
         Row(mainAxisAlignment: MainAxisAlignment.end, children: [
+          TextButton(onPressed: logout, child: Text("logout")),
           SizedBox(
             width: 40,
             height: 40,

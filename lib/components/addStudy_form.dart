@@ -6,6 +6,8 @@ import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 import 'package:study_with_me/provider/user_provider.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:study_with_me/screens/addUser_screen.dart';
+import 'package:study_with_me/screens/add_screen.dart';
 import 'dart:io';
 import 'package:study_with_me/screens/home_screen.dart';
 
@@ -158,15 +160,25 @@ class _addStudyFormState extends State<addStudyForm> {
                       content: Text('$_title 스터디가 생성 되었습니다!'),
                       actions: [
                         TextButton(
-                          onPressed: () {
-                            Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => HomeScreen()))
-                                .then((value) => setState(() {}));
-                          },
-                          child: Text('유저 초대'),
-                        ),
+                            onPressed: () {
+                              Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => AddUserScreen(
+                                              invite_code: response.body,
+                                              title: _title)))
+                                  .then((value) => setState(() {}));
+                            },
+                            child: Text('유저 초대')),
+                        TextButton(
+                            onPressed: () {
+                              Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => HomeScreen()))
+                                  .then((value) => setState(() {}));
+                            },
+                            child: Text('홈으로 이동')),
                       ]);
                 });
           }
