@@ -8,6 +8,7 @@ import 'package:study_with_me/screens/addUser_screen.dart';
 import 'package:study_with_me/screens/adminSchedule_screen.dart';
 import 'package:study_with_me/screens/board_screen.dart';
 import 'package:study_with_me/screens/members_screen.dart';
+import 'package:study_with_me/screens/voteSchedule_screen.dart';
 import 'package:study_with_me/tabs/home_tabs/tabs.dart';
 
 import '../models/study.dart';
@@ -85,6 +86,17 @@ class _SideMenuState extends State<SideMenu> {
               ),
             ),
           ),
+          ListTile(
+            leading: Icon(Icons.how_to_vote_outlined),
+            title: Text('일정 투표'),
+            onTap: () => Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => voteScheduleScreen(study: widget.study),
+                fullscreenDialog: true,
+              ),
+            ),
+          ),
           isLeader
               ? ListTile(
                   leading: Icon(Icons.edit_calendar_outlined),
@@ -103,7 +115,7 @@ class _SideMenuState extends State<SideMenu> {
                 ),
           isLeader
               ? ListTile(
-                  leading: Icon(Icons.edit_calendar_outlined),
+                  leading: Icon(Icons.send_to_mobile_outlined),
                   title: Text('유저 초대'),
                   onTap: () => Navigator.pushReplacement(
                     context,

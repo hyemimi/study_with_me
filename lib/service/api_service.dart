@@ -7,6 +7,7 @@ import 'package:study_with_me/models/alarm.dart';
 import 'package:study_with_me/models/board.dart';
 import 'package:study_with_me/models/coins.dart';
 import 'package:http/http.dart' as http;
+import 'package:study_with_me/models/schedule.dart';
 import 'package:study_with_me/models/study.dart';
 import 'package:study_with_me/models/user.dart';
 import 'package:study_with_me/provider/user_provider.dart';
@@ -116,6 +117,26 @@ class ApiService {
         alarmInstances.add(AlarmModel.fromJson(alarm));
       }
       return alarmInstances;
+    }
+    throw Error();
+  }
+
+  /** 스터디의 등록된 스케줄 리스트를 확인합니다 */
+  Future<List<ScheduleModel>> getSchedule(String invite_code) async {
+    List<ScheduleModel> scheduleInstances = [];
+    final response = await http.get(Uri.parse(
+        'http://10.0.2.2:3000/study/getSchedule?invite_code=${invite_code}'));
+    print(response.body);
+
+    if (response.statusCode == 200) {
+      final List<dynamic> schedule = jsonDecode(response.body);
+      for (var it in schedule) {
+        scheduleInstances.add(ScheduleModel.fromJson(it));
+      }
+      return scheduleInstances;
+    }
+    if (response.statusCode == 401) {
+      return scheduleInstances;
     }
     throw Error();
   }
