@@ -1,12 +1,16 @@
+import 'dart:convert';
+
+import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:study_with_me/components/home_appbar.dart';
+import 'package:provider/provider.dart';
+import 'package:study_with_me/candy_global_variable.dart';
 import 'package:study_with_me/models/study.dart';
+import 'package:study_with_me/provider/user_provider.dart';
 import 'package:study_with_me/screens/detail_screen.dart';
 import 'package:study_with_me/service/api_service.dart';
-import 'package:study_with_me/sidemenu/sidemenu.dart';
-
+import 'package:http/http.dart' as http;
 import '../models/schedule.dart';
 
 class voteScheduleScreen extends StatefulWidget {
@@ -18,7 +22,10 @@ class voteScheduleScreen extends StatefulWidget {
 
 class _voteScheduleScreenState extends State<voteScheduleScreen> {
   late List<ScheduleModel> schedule = [];
-  List<int> checkedSchedule = [];
+  late List<int> checkedSchedule = [];
+  var user_id = Provider.of<UserProvider>(
+          CandyGlobalVariable.naviagatorState.currentState!.context)
+      .user_id;
 
   void waitSchedule() async {
     schedule = await ApiService().getSchedule(widget.study.invite_code);
@@ -26,29 +33,67 @@ class _voteScheduleScreenState extends State<voteScheduleScreen> {
   }
 
   void postSchedule() async {
-    //user_id, invite_code,time, during, location 보내기 body
+    dynamic body = {
+      "user_id": user_id,
+      "invite_code": widget.study.invite_code,
+      "checkedSchedule": checkedSchedule,
+      "during": schedule[0].during.toString(),
+      "location": schedule[0].location
+    };
+    body = jsonEncode(body);
 
-    showDialog(
-        context: context,
-        builder: (_) {
-          //clickPayment();
-          return AlertDialog(
-              title: Text('투표가 완료'),
-              content: Text('일정이 확정될 때까지 기다려주세요'),
-              actions: [
-                TextButton(
-                  onPressed: () {
-                    Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) =>
-                                    DetailScreen(study: widget.study)))
-                        .then((value) => setState(() {}));
-                  },
-                  child: Text('확인'),
-                ),
-              ]);
-        });
+    final response = await http.post(
+        Uri.parse('http://10.0.2.2:3000/study/voteSchedule'),
+        headers: {"Content-Type": "application/json"},
+        body: body);
+
+    if (response.statusCode == 401) {
+      showDialog(
+          context: context,
+          builder: (_) {
+            //clickPayment();
+            return AlertDialog(
+                title: Icon(Icons.warning),
+                content: Text('투표가 이미 완료되었습니다'),
+                actions: [
+                  TextButton(
+                    onPressed: () {
+                      Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      DetailScreen(study: widget.study)))
+                          .then((value) => setState(() {}));
+                    },
+                    child: Text('확인'),
+                  ),
+                ]);
+          });
+    }
+
+    if (response.statusCode == 200) {
+      showDialog(
+          context: context,
+          builder: (_) {
+            //clickPayment();
+            return AlertDialog(
+                title: Text('투표 완료'),
+                content: Text('일정이 확정될 때까지 기다려주세요'),
+                actions: [
+                  TextButton(
+                    onPressed: () {
+                      Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      DetailScreen(study: widget.study)))
+                          .then((value) => setState(() {}));
+                    },
+                    child: Text('확인'),
+                  ),
+                ]);
+          });
+    }
   }
 
   @override
