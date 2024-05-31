@@ -36,6 +36,21 @@ class _AddUserScreenState extends State<AddUserScreen> {
       //userIdList.add(response.body);
       email = "";
       setState(() {});
+    } else if (response.statusCode == 401) {
+      showDialog(
+          context: context,
+          builder: (_) {
+            //clickPayment();
+            return AlertDialog(content: Text('이미 가입된 유저입니다'), actions: [
+              TextButton(
+                  onPressed: () {
+                    email = "";
+                    setState(() {});
+                    Navigator.pop(context);
+                  },
+                  child: Text('확인')),
+            ]);
+          });
     } else {
       showDialog(
           context: context,
@@ -66,6 +81,7 @@ class _AddUserScreenState extends State<AddUserScreen> {
         Uri.parse('http://10.0.2.2:3000/study/sendNotification'),
         headers: {"Content-Type": "application/json"},
         body: body);
+
     if (response.statusCode == 200) {
       showDialog(
           context: context,
