@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:study_with_me/candy_global_variable.dart';
 import 'package:study_with_me/provider/user_provider.dart';
-import 'package:study_with_me/screens/Schedule_screen.dart';
+import 'package:study_with_me/screens/Determination_screen.dart';
 import 'package:study_with_me/screens/addUser_screen.dart';
 import 'package:study_with_me/screens/adminSchedule_screen.dart';
 import 'package:study_with_me/screens/board_screen.dart';
@@ -76,17 +76,6 @@ class _SideMenuState extends State<SideMenu> {
             ),
           ),
           ListTile(
-            leading: Icon(Icons.library_books_rounded),
-            title: Text('스터디 일정'),
-            onTap: () => Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(
-                builder: (context) => ScheduleScreen(study: widget.study),
-                fullscreenDialog: true,
-              ),
-            ),
-          ),
-          ListTile(
             leading: Icon(Icons.how_to_vote_outlined),
             title: Text('일정 투표'),
             onTap: () => Navigator.pushReplacement(
@@ -97,6 +86,22 @@ class _SideMenuState extends State<SideMenu> {
               ),
             ),
           ),
+          isLeader
+              ? ListTile(
+                  leading: Icon(Icons.access_time_sharp),
+                  title: Text('일정 확정'),
+                  onTap: () => Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) =>
+                          DeterminationScreen(study: widget.study),
+                      fullscreenDialog: true,
+                    ),
+                  ),
+                )
+              : ListTile(
+                  leading: SizedBox(),
+                ),
           isLeader
               ? ListTile(
                   leading: Icon(Icons.edit_calendar_outlined),

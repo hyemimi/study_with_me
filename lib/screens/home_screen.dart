@@ -28,7 +28,8 @@ class _HomeScreenState extends State<HomeScreen> {
   final context = CandyGlobalVariable.naviagatorState.currentState!.context;
 
   void waitForStudies() async {
-    studies = await ApiService().getStudies(context);
+    studies = await ApiService()
+        .getStudies(CandyGlobalVariable.naviagatorState.currentState!.context);
     isLoading = false;
     setState(() {});
   }

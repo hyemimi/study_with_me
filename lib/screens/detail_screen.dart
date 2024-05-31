@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:study_with_me/sidemenu/sidemenu.dart';
 import '../models/study.dart';
 
@@ -67,7 +68,7 @@ class DetailScreen extends StatelessWidget {
               children: [
                 Text(
                   //소개글
-                  '스터디 일정',
+                  '예정된 스터디 일정',
                   style: TextStyle(fontSize: 15, color: Color(0xff939191)),
                 ),
               ],
@@ -79,13 +80,17 @@ class DetailScreen extends StatelessWidget {
               padding: const EdgeInsets.all(10),
               decoration:
                   BoxDecoration(color: Color(0xffF7ECB4).withOpacity(0.24)),
-              child: Text(
-                // 스터디 일정 및 장소
-                '',
-                style: TextStyle(fontSize: 15),
-              ),
+              child: Column(children: [
+                Text(
+                  // 스터디 일정 및 장소
+                  '장소 : ${study.location} \n진행시간 : ${DateFormat("yyyy-MM-dd HH:mm").format(DateTime.parse(study.time))} ~ ${DateFormat("yyyy-MM-dd HH:mm").format(DateTime.parse(study.time).add(Duration(minutes: study.during)))} \n (${(study.during / 60).floor()}시간) ',
+                  style: TextStyle(fontSize: 15),
+                ),
+              ]),
             ),
           ]),
         )));
   }
 }
+
+//

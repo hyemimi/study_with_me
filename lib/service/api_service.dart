@@ -140,4 +140,25 @@ class ApiService {
     }
     throw Error();
   }
+
+  /** 투표 완료한 유저들을 조회합니다 */
+  Future<int> getCompletedMembers(String invite_code) async {
+    final response = await http.get(Uri.parse(
+        'http://10.0.2.2:3000/study/getCompletedMembers?invite_code=${invite_code}'));
+    print(response.body);
+
+    if (response.statusCode == 200) {
+      var res = json.decode(response.body);
+      //final List<dynamic> m = jsonDecode(response.body);
+      //final List<dynamic> mem = jsonDecode(response.body);
+      // for (var member in members) {
+      //   membersInstances.add(UserModel.fromJson(member));
+      // }
+      return res[0]['cnt'];
+    }
+    if (response.statusCode == 401) {
+      return 0;
+    }
+    throw Error();
+  }
 }
