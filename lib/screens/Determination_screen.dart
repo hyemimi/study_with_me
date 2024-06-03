@@ -9,6 +9,7 @@ import 'package:study_with_me/screens/home_screen.dart';
 import 'package:study_with_me/service/api_service.dart';
 import 'package:study_with_me/sidemenu/sidemenu.dart';
 import 'package:http/http.dart' as http;
+import 'package:study_with_me/tabs/home_tabs/tabs.dart';
 
 class DeterminationScreen extends StatefulWidget {
   StudyModel study;
@@ -57,7 +58,8 @@ class _DeterminationScreenState extends State<DeterminationScreen> {
                         Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => HomeScreen()))
+                                    builder: (context) =>
+                                        Tabs(selectedIndex: 0)))
                             .then((value) => setState(() {}));
                       },
                       child: Text('확인'))

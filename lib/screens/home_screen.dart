@@ -64,7 +64,8 @@ class _HomeScreenState extends State<HomeScreen> {
             width: 40,
             height: 40,
             child: CircleAvatar(
-                backgroundImage: NetworkImage(
+                backgroundImage: const AssetImage('assets/logoImage.png'),
+                foregroundImage: NetworkImage(
                     'http://10.0.2.2:3000/resources/profileImage/${_userProvider.route}')),
           ),
           SizedBox(width: 10),
@@ -121,11 +122,18 @@ class _HomeScreenState extends State<HomeScreen> {
                         children: [
                           Positioned(
                             child: Container(
-                              child: Image.network(
-                                  'http://10.0.2.2:3000/resources/banner/${studies![index].banner}',
-                                  fit: BoxFit.cover,
+                              child: FadeInImage.assetNetwork(
+                                  placeholder: 'assets/logoImage.png',
+                                  image:
+                                      'http://10.0.2.2:3000/resources/banner/${studies![index].banner}',
                                   width: 200,
-                                  height: 250),
+                                  height: 250,
+                                  fit: BoxFit.cover,
+                                  imageErrorBuilder: (BuildContext context,
+                                      Object exception,
+                                      StackTrace? stackTrace) {
+                                    return Image.asset('assets/logoImage.png');
+                                  }),
                             ),
                           ),
                           Positioned.fill(

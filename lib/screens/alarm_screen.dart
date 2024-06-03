@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -11,6 +10,7 @@ import 'package:study_with_me/screens/home_screen.dart';
 import 'package:study_with_me/service/api_service.dart';
 import 'package:study_with_me/models/coins.dart';
 import 'package:http/http.dart' as http;
+import 'package:study_with_me/tabs/home_tabs/tabs.dart';
 
 class AlarmScreen extends StatefulWidget {
   AlarmScreen({super.key});
@@ -51,8 +51,10 @@ class _AlarmScreenState extends State<AlarmScreen> {
             return AlertDialog(content: Text('스터디 참여 완료'), actions: [
               TextButton(
                 onPressed: () {
-                  Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => HomeScreen()))
+                  Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => Tabs(selectedIndex: 0)))
                       .then((value) => setState(() {}));
                 },
                 child: Text('확인'),

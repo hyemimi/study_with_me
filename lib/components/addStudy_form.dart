@@ -10,6 +10,7 @@ import 'package:study_with_me/screens/addUser_screen.dart';
 import 'package:study_with_me/screens/add_screen.dart';
 import 'dart:io';
 import 'package:study_with_me/screens/home_screen.dart';
+import 'package:study_with_me/tabs/home_tabs/tabs.dart';
 
 class addStudyForm extends StatefulWidget {
   @override
@@ -175,7 +176,8 @@ class _addStudyFormState extends State<addStudyForm> {
                               Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) => HomeScreen()))
+                                          builder: (context) =>
+                                              Tabs(selectedIndex: 0)))
                                   .then((value) => setState(() {}));
                             },
                             child: Text('홈으로 이동')),

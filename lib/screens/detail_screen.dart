@@ -31,12 +31,17 @@ class DetailScreen extends StatelessWidget {
           child: Column(children: [
             Container(
               child: Center(
-                child: Image.network(
-                  'http://10.0.2.2:3000/resources/banner/${study.banner}',
-                  width: 360,
-                  height: 300,
-                  fit: BoxFit.cover,
-                ),
+                child: FadeInImage.assetNetwork(
+                    placeholder: 'assets/logoImage.png',
+                    image:
+                        'http://10.0.2.2:3000/resources/banner/${study.banner}',
+                    width: 360,
+                    height: 300,
+                    fit: BoxFit.cover,
+                    imageErrorBuilder: (BuildContext context, Object exception,
+                        StackTrace? stackTrace) {
+                      return Image.asset('assets/logoImage.png');
+                    }),
               ),
             ),
             SizedBox(height: 10),
