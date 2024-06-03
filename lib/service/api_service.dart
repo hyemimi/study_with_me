@@ -10,6 +10,7 @@ import 'package:http/http.dart' as http;
 import 'package:study_with_me/models/schedule.dart';
 import 'package:study_with_me/models/study.dart';
 import 'package:study_with_me/models/user.dart';
+import 'package:study_with_me/models/userSchedule.dart';
 import 'package:study_with_me/provider/user_provider.dart';
 
 class ApiService {
@@ -158,6 +159,26 @@ class ApiService {
     }
     if (response.statusCode == 401) {
       return 0;
+    }
+    throw Error();
+  }
+
+  /** 유저의 전체 스터디 일정을 조회합니다 */
+  Future<List<UserScheduleModel>> getAllSchedule(int user_id) async {
+    List<UserScheduleModel> scheduleInstances = [];
+    final response = await http.get(Uri.parse(
+        'http://10.0.2.2:3000/study/getAllSchedule?user_id=${user_id}'));
+    print(response.body);
+
+    if (response.statusCode == 200) {
+      final List<dynamic> schedule = jsonDecode(response.body);
+      for (var it in schedule) {
+        scheduleInstances.add(UserScheduleModel.fromJson(it));
+      }
+      return scheduleInstances;
+    }
+    if (response.statusCode == 401) {
+      return scheduleInstances;
     }
     throw Error();
   }

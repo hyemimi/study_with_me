@@ -32,13 +32,11 @@ class _TabsPageState extends State<Tabs> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Scaffold(
-        body: IndexedStack(
-          index: widget.selectedIndex,
-          children: [
-            for (final tabItem in TabNavigationItem.items) tabItem.page,
-          ],
-        ),
+      body: IndexedStack(
+        index: widget.selectedIndex,
+        children: [
+          for (final tabItem in TabNavigationItem.items) tabItem.page,
+        ],
       ),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
