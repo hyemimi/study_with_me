@@ -73,9 +73,18 @@ class _CalenderScreenState extends State<CalenderScreen> {
               return isSameDay(_selectedDay, day);
             },
             calendarStyle: CalendarStyle(
+              selectedDecoration: const BoxDecoration(
+                color: Colors.lightGreen,
+                shape: BoxShape.circle,
+              ),
+              todayDecoration: const BoxDecoration(
+                color: Colors.grey,
+                shape: BoxShape.circle,
+              ),
               markerSize: 10.0,
-              markerDecoration:
-                  BoxDecoration(color: Colors.red, shape: BoxShape.circle),
+              markerDecoration: BoxDecoration(
+                  color: Theme.of(context).colorScheme.primaryContainer,
+                  shape: BoxShape.circle),
             ),
             onDaySelected: (selectedDay, focusedDay) {
               if (!isSameDay(_selectedDay, selectedDay)) {
