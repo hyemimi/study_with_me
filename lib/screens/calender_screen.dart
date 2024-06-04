@@ -33,7 +33,7 @@ class _CalenderScreenState extends State<CalenderScreen> {
     setState(() {
       for (var date in eventScheduleList) {
         _eventsList[DateTime.parse(date.time).toLocal()] = [
-          '${date.title}\n${DateFormat("yyyy-MM-dd HH:mm").format(DateTime.parse(date.time).toLocal())} ~ ${DateFormat("yyyy-MM-dd HH:mm").format(DateTime.parse(date.time).add(Duration(minutes: date.during)).toLocal())} [${date.location}]'
+          '${date.title}\n${DateFormat("yyyy-MM-dd HH:mm").format(DateTime.parse(date.time).toLocal())} ~ ${DateFormat("yyyy-MM-dd HH:mm").format(DateTime.parse(date.time).add(Duration(minutes: date.during)).toLocal())}\n${date.location}'
         ];
       }
     });
@@ -61,10 +61,17 @@ class _CalenderScreenState extends State<CalenderScreen> {
     }
 
     return Scaffold(
-        appBar: AppBar(title: Text('캘린더 페이지')),
+        appBar: AppBar(title: Text('나의 캘린더')),
         body: Column(children: [
           TableCalendar(
-            headerStyle: HeaderStyle(formatButtonVisible: false),
+            headerStyle: HeaderStyle(
+              formatButtonVisible: false,
+              titleCentered: true,
+              titleTextFormatter: (date, locale) =>
+                  DateFormat.yMMMMd(locale).format(date),
+              titleTextStyle:
+                  const TextStyle(fontSize: 20.0, color: Colors.black87),
+            ),
             firstDay: DateTime.utc(2021, 10, 16),
             lastDay: DateTime.utc(2030, 3, 14),
             focusedDay: _focusedDay,
@@ -74,16 +81,17 @@ class _CalenderScreenState extends State<CalenderScreen> {
             },
             calendarStyle: CalendarStyle(
               selectedDecoration: const BoxDecoration(
-                color: Colors.lightGreen,
+                color: Colors.green,
                 shape: BoxShape.circle,
               ),
               todayDecoration: const BoxDecoration(
                 color: Colors.grey,
                 shape: BoxShape.circle,
               ),
-              markerSize: 10.0,
+              markerSize: 20.0,
               markerDecoration: BoxDecoration(
-                  color: Theme.of(context).colorScheme.primaryContainer,
+                  image: DecorationImage(
+                      image: AssetImage('assets/logoImage.png')),
                   shape: BoxShape.circle),
             ),
             onDaySelected: (selectedDay, focusedDay) {
@@ -101,9 +109,21 @@ class _CalenderScreenState extends State<CalenderScreen> {
           ListView(
             shrinkWrap: true,
             children: getEventForDay(_selectedDay!)
-                .map((event) => ListTile(
-                      title: Text(event.toString()),
-                    ))
+                .map((event) => Container(
+                    margin:
+                        EdgeInsets.symmetric(vertical: 4.0, horizontal: 4.0),
+                    decoration: BoxDecoration(
+                      color: Color(0xffF7ECB4).withOpacity(0.24),
+                      border: Border.all(color: Color(0xffF7ECB4), width: 1.0),
+                      borderRadius: BorderRadius.circular(8.0),
+                    ),
+                    child: ListTile(
+                      leading: Icon(Icons.bookmark),
+                      title: Text(event.toString(),
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black87)),
+                    )))
                 .toList(),
           )
         ]));

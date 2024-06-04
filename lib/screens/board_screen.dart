@@ -94,15 +94,6 @@ class _BoardScreenState extends State<BoardScreen> {
                                                   .toLocal()),
                                           textAlign: TextAlign.center)),
                                   Row(children: [
-                                    SizedBox(
-                                      width: 25,
-                                      height: 25,
-                                      child: CircleAvatar(
-                                          foregroundImage: NetworkImage(
-                                              'http://10.0.2.2:3000/resources/profileImage/${board.route}'),
-                                          backgroundImage: const AssetImage(
-                                              'assets/logoImage.png')),
-                                    ),
                                     SizedBox(width: 10),
                                     Text(
                                       board.name,
