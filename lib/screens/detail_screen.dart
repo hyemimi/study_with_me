@@ -88,7 +88,7 @@ class DetailScreen extends StatelessWidget {
               child: Column(children: [
                 Text(
                   // 스터디 일정 및 장소
-                  '장소 : ${study.location} \n진행시간 : ${DateFormat("yyyy-MM-dd HH:mm").format(DateTime.parse(study.time))} ~ ${DateFormat("yyyy-MM-dd HH:mm").format(DateTime.parse(study.time).add(Duration(minutes: study.during)))} \n (${(study.during / 60).floor()}시간) ',
+                  '장소 : ${study.location} \n진행시간 : ${DateFormat("yyyy-MM-dd HH:mm").format(DateTime.parse(study.time).toLocal())} ~ ${DateFormat("yyyy-MM-dd HH:mm").format(DateTime.parse(study.time).add(Duration(minutes: study.during)).toLocal())} \n (${(study.during / 60).floor()}시간) ',
                   style: TextStyle(fontSize: 15),
                 ),
               ]),

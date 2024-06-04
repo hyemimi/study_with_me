@@ -17,7 +17,7 @@ class AdminScheduleScreen extends StatefulWidget {
 
 class _AdminScheduleScreenState extends State<AdminScheduleScreen> {
   late int hour, minutes;
-  int during = 0;
+  late int during = 0;
   String location = '';
 
   // time 배열로 넘겨야 함 TimeModel 만들기
@@ -26,6 +26,7 @@ class _AdminScheduleScreenState extends State<AdminScheduleScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    during = 0;
   }
 
   final format = DateFormat("yyyy-MM-dd HH:mm");
@@ -242,13 +243,14 @@ class _AdminScheduleScreenState extends State<AdminScheduleScreen> {
                 child: ListView.builder(
                   itemCount: selectedDateTimes.length,
                   itemBuilder: (context, index) {
+                    var tempDate = selectedDateTimes[index];
                     return ListTile(
                         title: Container(
                       height: 50,
                       color: Theme.of(context).colorScheme.secondaryContainer,
                       child: Center(
                         child: Text(
-                          '${format.format(selectedDateTimes[index]!)} ~ ${format.format(selectedDateTimes[index]!.add(Duration(minutes: during)))} ',
+                          '${format.format(tempDate!)} ~ ${format.format(tempDate!.add(Duration(minutes: during)))} ',
                           textAlign: TextAlign.center,
                         ),
                       ),

@@ -29,6 +29,7 @@ class _voteScheduleScreenState extends State<voteScheduleScreen> {
 
   void waitSchedule() async {
     schedule = await ApiService().getSchedule(widget.study.invite_code);
+    print(schedule);
     setState(() {});
   }
 
@@ -142,8 +143,9 @@ class _voteScheduleScreenState extends State<voteScheduleScreen> {
                                   SizedBox(
                                       width: 150,
                                       child: Text(
-                                          DateFormat('yyyy-MM-dd HH:mm')
-                                              .format(DateTime.parse(it.time)),
+                                          DateFormat('yyyy-MM-dd HH:mm').format(
+                                              DateTime.parse(it.time)
+                                                  .toLocal()),
                                           style: TextStyle(fontSize: 18),
                                           textAlign: TextAlign.start)),
                                   //SizedBox(width: 150),

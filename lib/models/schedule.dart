@@ -1,6 +1,6 @@
 class ScheduleModel {
   final String invite_code, location;
-  final String time;
+  String time;
   final int during;
   final int schedule_id;
 

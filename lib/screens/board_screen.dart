@@ -90,7 +90,8 @@ class _BoardScreenState extends State<BoardScreen> {
                                   SizedBox(
                                       child: Text(
                                           DateFormat('yyyy-MM-dd').format(
-                                              DateTime.parse(board.time)),
+                                              DateTime.parse(board.time)
+                                                  .toLocal()),
                                           textAlign: TextAlign.center)),
                                   Row(children: [
                                     SizedBox(
