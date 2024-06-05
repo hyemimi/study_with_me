@@ -5,12 +5,10 @@ class UserProvider extends ChangeNotifier {
   String _email = "";
   String _name = "";
   String _route = "";
-
   String get email => _email;
   String get name => _name;
   int get user_id => _user_id;
   String get route => _route;
-
   void set email(String email) {
     _email = email;
     notifyListeners();

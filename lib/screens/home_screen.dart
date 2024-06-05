@@ -59,7 +59,6 @@ class _HomeScreenState extends State<HomeScreen> {
       body: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
         SizedBox(height: 10),
         Row(mainAxisAlignment: MainAxisAlignment.end, children: [
-          TextButton(onPressed: logout, child: Text("logout")),
           SizedBox(
             width: 40,
             height: 40,

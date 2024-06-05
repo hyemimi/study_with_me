@@ -5,7 +5,7 @@ class HomeBanner extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 220,
+      height: 150,
       decoration: BoxDecoration(
         image: DecorationImage(
           fit: BoxFit.cover,
