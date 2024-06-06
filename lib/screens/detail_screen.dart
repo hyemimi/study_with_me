@@ -86,11 +86,13 @@ class DetailScreen extends StatelessWidget {
               decoration:
                   BoxDecoration(color: Color(0xffF7ECB4).withOpacity(0.24)),
               child: Column(children: [
-                Text(
-                  // 스터디 일정 및 장소
-                  '장소 : ${study.location} \n진행시간 : ${DateFormat("yyyy-MM-dd HH:mm").format(DateTime.parse(study.time).toLocal())} ~ ${DateFormat("yyyy-MM-dd HH:mm").format(DateTime.parse(study.time).add(Duration(minutes: study.during)).toLocal())} \n (${(study.during / 60).floor()}시간) ',
-                  style: TextStyle(fontSize: 15),
-                ),
+                study.time != ''
+                    ? Text(
+                        // 스터디 일정 및 장소
+                        '장소 : ${study.location} \n진행시간 : ${DateFormat("yyyy-MM-dd HH:mm").format(DateTime.parse(study.time).toLocal())} ~ ${DateFormat("yyyy-MM-dd HH:mm").format(DateTime.parse(study.time).add(Duration(minutes: study.during)).toLocal())} \n (${(study.during / 60).floor()}시간) ',
+                        style: TextStyle(fontSize: 15),
+                      )
+                    : Text(''),
               ]),
             ),
           ]),

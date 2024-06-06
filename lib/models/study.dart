@@ -1,7 +1,8 @@
 class StudyModel {
   final String description, invite_code, title, banner;
-  final String location, time;
-  final int leader_id, during;
+  String location, time;
+  final int leader_id;
+  int during;
 
   // 회원정보
   StudyModel.fromJson(Map<String, dynamic> json)
