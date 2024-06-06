@@ -27,13 +27,15 @@ class UserBox extends StatelessWidget {
         SizedBox(width: 20),
         SizedBox(width: 100, child: Text(name, textAlign: TextAlign.center)),
         SizedBox(width: 20),
-        SizedBox(
-          width: 150,
-          child: Row(
-            children: [
-              Icon(Icons.email),
-              SizedBox(child: Text(email, textAlign: TextAlign.center))
-            ],
+        Expanded(
+          child: SizedBox(
+            width: 150,
+            child: Row(
+              children: [
+                Icon(Icons.email),
+                SizedBox(child: Text(email, textAlign: TextAlign.center))
+              ],
+            ),
           ),
         ),
         SizedBox(height: 50)
