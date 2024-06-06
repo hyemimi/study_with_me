@@ -36,10 +36,7 @@ class _voteScheduleScreenState extends State<voteScheduleScreen> {
   void postSchedule() async {
     dynamic body = {
       "user_id": user_id,
-      "invite_code": widget.study.invite_code,
       "checkedSchedule": checkedSchedule,
-      "during": schedule[0].during.toString(),
-      "location": schedule[0].location
     };
     body = jsonEncode(body);
 

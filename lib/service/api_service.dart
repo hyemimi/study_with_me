@@ -3,7 +3,6 @@ import 'package:dio/dio.dart';
 import 'package:provider/provider.dart';
 import 'package:study_with_me/models/alarm.dart';
 import 'package:study_with_me/models/board.dart';
-import 'package:study_with_me/models/coins.dart';
 import 'package:http/http.dart' as http;
 import 'package:study_with_me/models/schedule.dart';
 import 'package:study_with_me/models/study.dart';

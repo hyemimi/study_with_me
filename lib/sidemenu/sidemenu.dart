@@ -42,15 +42,17 @@ class _SideMenuState extends State<SideMenu> {
     var user_id = _userProvider.user_id;
 
     return Drawer(
+      backgroundColor: Theme.of(context).colorScheme.background,
       child: ListView(
         padding: EdgeInsets.zero,
         children: [
-          DrawerHeader(
+          Container(
+            width: double.infinity,
+            height: 200,
             child: Center(
                 child: Text(
-              'Study With Me',
-              style: TextStyle(
-                  color: Theme.of(context).primaryColor, fontSize: 25),
+              "${widget.study.title}",
+              style: TextStyle(fontSize: 20),
             )),
           ),
           ListTile(
