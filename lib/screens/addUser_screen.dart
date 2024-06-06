@@ -27,6 +27,12 @@ class _AddUserScreenState extends State<AddUserScreen> {
     super.initState();
   }
 
+  void deleteEmail(String em) {
+    setState(() {
+      emailList.remove(em);
+    });
+  }
+
   void pressAddButton(e) async {
     final response = await http
         .get(Uri.parse('http://10.0.2.2:3000/study/getUser?email=${e}'));
@@ -107,57 +113,84 @@ class _AddUserScreenState extends State<AddUserScreen> {
     return Scaffold(
         appBar: AppBar(title: Text('유저 초대')),
         body: Expanded(
-            child: Column(
-          children: [
-            Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-              Container(
-                width: 300,
-                height: 50,
-                padding: const EdgeInsets.all(10),
-                child: TextFormField(
-                  onChanged: (value) {
-                    email = value;
+          child: Column(
+            children: [
+              Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Container(
+                      width: 300,
+                      height: 60,
+                      padding: const EdgeInsets.all(10),
+                      child: TextFormField(
+                        onChanged: (value) {
+                          email = value;
+                        },
+                        textAlignVertical: TextAlignVertical.center,
+                        maxLines: 1,
+                        decoration: InputDecoration(
+                          contentPadding:
+                              EdgeInsets.symmetric(vertical: 0, horizontal: 6),
+                          filled: true,
+                          fillColor: Colors.grey.withOpacity(0.24),
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide.none,
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide.none,
+                          ),
+                        ),
+                      ),
+                    ),
+                    IconButton(
+                        iconSize: 25,
+                        onPressed: () => pressAddButton(email),
+                        icon: Icon(Icons.add))
+                  ]),
+              Expanded(
+                child: ListView.separated(
+                  itemCount: emailList.length,
+                  itemBuilder: (context, index) {
+                    return ListTile(
+                        title: Padding(
+                      padding: const EdgeInsets.all(2),
+                      child: Container(
+                          height: 50,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Row(
+                                children: [
+                                  Icon(Icons.email),
+                                  Text(
+                                    '${emailList[index]}',
+                                  )
+                                ],
+                              ),
+                              IconButton(
+                                  onPressed: () =>
+                                      deleteEmail(emailList[index]),
+                                  icon: Icon(Icons.delete, size: 20))
+                            ],
+                          )),
+                    ));
                   },
-                  maxLines: 1,
-                  decoration: InputDecoration(
-                    filled: true,
-                    fillColor: Colors.grey.withOpacity(0.24),
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide.none,
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide.none,
-                    ),
+                  separatorBuilder: (context, index) => const Divider(
+                    color: Color(0xffDFDFDF),
+                    height: 0,
+                    indent: 30,
+                    endIndent: 30,
                   ),
                 ),
               ),
-              IconButton(
-                  iconSize: 25,
-                  onPressed: () => pressAddButton(email),
-                  icon: Icon(Icons.add))
-            ]),
-            Expanded(
-              child: ListView.builder(
-                itemCount: emailList.length,
-                itemBuilder: (context, index) {
-                  return ListTile(
-                      title: Container(
-                    height: 50,
-                    color: Theme.of(context).colorScheme.secondaryContainer,
-                    child: Center(
-                      child: Text(
-                        '${emailList[index]}',
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                  ));
-                },
-              ),
-            ),
-            Center(
-                child: ElevatedButton(
-                    onPressed: () => addMembers(), child: Text("초대하기")))
-          ],
-        )));
+              SizedBox(
+                  width: double.infinity,
+                  child: Center(
+                      child: ElevatedButton(
+                          onPressed: () => addMembers(), child: Text("초대하기"))))
+            ],
+          ),
+        ));
   }
 }
