@@ -44,7 +44,7 @@ class _voteScheduleScreenState extends State<voteScheduleScreen> {
     body = jsonEncode(body);
 
     final response = await http.post(
-        Uri.parse('http://10.0.2.2:3000/study/voteSchedule'),
+        Uri.parse('http://10.0.2.2:3000/calendar/voteSchedule'),
         headers: {"Content-Type": "application/json"},
         body: body);
 

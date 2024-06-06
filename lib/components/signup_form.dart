@@ -112,8 +112,8 @@ class _SignupFormState extends State<SignupForm> {
         dio.options.contentType = 'multipart/form-data';
         dio.options.maxRedirects.isFinite;
 
-        var response =
-            await dio.post('http://10.0.2.2:3000/uploadProfile', data: input);
+        var response = await dio.post('http://10.0.2.2:3000/auth/uploadProfile',
+            data: input);
         print('성공적으로 업로드했습니다');
         return response.data;
       } catch (e) {
@@ -127,7 +127,7 @@ class _SignupFormState extends State<SignupForm> {
           _signupFormKey.currentState!.save();
 
           final response = await http.post(
-              Uri.parse('http://10.0.2.2:3000/register'),
+              Uri.parse('http://10.0.2.2:3000/auth/register'),
               body: {"email": _email, "name": _name, "pwd": _password});
           if (response.statusCode == 200) {
             // 회원가입 성공

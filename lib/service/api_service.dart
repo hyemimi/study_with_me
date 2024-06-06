@@ -1,7 +1,5 @@
 import 'dart:convert';
-import 'dart:io';
 import 'package:dio/dio.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
 import 'package:study_with_me/models/alarm.dart';
 import 'package:study_with_me/models/board.dart';
@@ -17,22 +15,6 @@ class ApiService {
   // get 호출을 관리합니다
   final String baseUrl = "http://10.0.2.2:3000"; // test 용 api
 
-  Future<List<WebtoonModel>> getCoins() async {
-    List<WebtoonModel> coinInstances = [];
-    final url = Uri.parse('$baseUrl/today');
-    final response = await http.get(url);
-
-    if (response.statusCode == 200) {
-      final List<dynamic> coins = jsonDecode(response.body);
-      for (var coin in coins) {
-        final instance = WebtoonModel.fromJson(coin);
-        coinInstances.add(instance);
-      }
-      return coinInstances;
-    }
-    throw Error();
-  }
-
   /** 유저가 속한 스터디 모임을 조회합니다 */
   Future<List<StudyModel>> getStudies(context) async {
     late UserProvider _userProvider = Provider.of<UserProvider>(context);
@@ -40,25 +22,9 @@ class ApiService {
     var dio = new Dio();
     List<StudyModel> studyInstances = [];
 
-    // final queryParameters = {'user_id': user_id};
-    // final uri =
-    //     Uri.http('http://10.0.2.2:3000', '/study/getStudies', queryParameters);
-    //final response = await http.get(uri,
-    //     headers: {HttpHeaders.acceptCharsetHeader: 'application/json'});
+    final response = await http
+        .get(Uri.parse('${baseUrl}/study/getStudies?user_id=${user_id}'));
 
-    //dynamic queryParameter = {"user_id": 20};
-    //queryParameter = jsonEncode(queryParameter);
-
-    // 스터디 생성
-    // final response = await dio.get('http://localhost:3000/study/getStudies',
-    //     //headers: {"Content-Type": "application/json"},
-    //     queryParameters: queryParameter);
-
-    final response = await http.get(
-        Uri.parse('http://10.0.2.2:3000/study/getStudies?user_id=${user_id}'));
-    //final url = Uri.parse('$baseUrl/study/getStudies');
-    // final url = Uri.parse('http://10.0.2.2:3000/study/getStudies?user_id=20');
-    //final response = await http.get(url);
     print(response.body);
 
     if (response.statusCode == 200) {
@@ -74,8 +40,8 @@ class ApiService {
   /** 유저가 속한 스터디 멤버들을 조회합니다 */
   Future<List<UserModel>> getMembers(String invite_code) async {
     List<UserModel> memberInstances = [];
-    final response = await http.get(Uri.parse(
-        'http://10.0.2.2:3000/study/getMembers?invite_code=${invite_code}'));
+    final response = await http.get(
+        Uri.parse('${baseUrl}/study/getMembers?invite_code=${invite_code}'));
     print(response.body);
 
     if (response.statusCode == 200) {
@@ -91,8 +57,8 @@ class ApiService {
   /** 유저가 속한 스터디의 게시글들을 조회합니다 */
   Future<List<BoardModel>> getBoard(String invite_code) async {
     List<BoardModel> boardInstances = [];
-    final response = await http.get(Uri.parse(
-        'http://10.0.2.2:3000/study/getBoard?invite_code=${invite_code}'));
+    final response = await http
+        .get(Uri.parse('${baseUrl}/board/getBoard?invite_code=${invite_code}'));
     print(response.body);
 
     if (response.statusCode == 200) {
@@ -109,7 +75,7 @@ class ApiService {
   Future<List<AlarmModel>> getNotification(int user_id) async {
     List<AlarmModel> alarmInstances = [];
     final response = await http.get(Uri.parse(
-        'http://10.0.2.2:3000/study/getNotification?user_id=${user_id.toString()}'));
+        '${baseUrl}/study/getNotification?user_id=${user_id.toString()}'));
     print(response.body);
 
     if (response.statusCode == 200) {
@@ -126,7 +92,7 @@ class ApiService {
   Future<List<ScheduleModel>> getSchedule(String invite_code) async {
     List<ScheduleModel> scheduleInstances = [];
     final response = await http.get(Uri.parse(
-        'http://10.0.2.2:3000/study/getSchedule?invite_code=${invite_code}'));
+        '${baseUrl}/calendar/getSchedule?invite_code=${invite_code}'));
     print(response.body);
 
     if (response.statusCode == 200) {
@@ -145,16 +111,12 @@ class ApiService {
   /** 투표 완료한 유저들을 조회합니다 */
   Future<int> getCompletedMembers(String invite_code) async {
     final response = await http.get(Uri.parse(
-        'http://10.0.2.2:3000/study/getCompletedMembers?invite_code=${invite_code}'));
+        '${baseUrl}/calendar/getCompletedMembers?invite_code=${invite_code}'));
     print(response.body);
 
     if (response.statusCode == 200) {
       var res = json.decode(response.body);
-      //final List<dynamic> m = jsonDecode(response.body);
-      //final List<dynamic> mem = jsonDecode(response.body);
-      // for (var member in members) {
-      //   membersInstances.add(UserModel.fromJson(member));
-      // }
+
       return res[0]['cnt'];
     }
     if (response.statusCode == 401) {
@@ -166,8 +128,8 @@ class ApiService {
   /** 유저의 전체 스터디 일정을 조회합니다 */
   Future<List<UserScheduleModel>> getAllSchedule(int user_id) async {
     List<UserScheduleModel> scheduleInstances = [];
-    final response = await http.get(Uri.parse(
-        'http://10.0.2.2:3000/study/getAllSchedule?user_id=${user_id}'));
+    final response = await http.get(
+        Uri.parse('${baseUrl}/calendar/getAllSchedule?user_id=${user_id}'));
     print(response.body);
 
     if (response.statusCode == 200) {

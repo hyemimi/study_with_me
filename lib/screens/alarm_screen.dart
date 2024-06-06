@@ -3,12 +3,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:study_with_me/candy_global_variable.dart';
-import 'package:study_with_me/components/home_appbar.dart';
 import 'package:study_with_me/models/alarm.dart';
 import 'package:study_with_me/provider/user_provider.dart';
-import 'package:study_with_me/screens/home_screen.dart';
 import 'package:study_with_me/service/api_service.dart';
-import 'package:study_with_me/models/coins.dart';
 import 'package:http/http.dart' as http;
 import 'package:study_with_me/tabs/home_tabs/tabs.dart';
 

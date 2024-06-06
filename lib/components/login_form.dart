@@ -63,7 +63,7 @@ class LoginForm extends StatelessWidget {
           _formKey.currentState!.save();
 
           final response = await http.post(
-              Uri.parse('http://10.0.2.2:3000/login'),
+              Uri.parse('http://10.0.2.2:3000/auth/login'),
               body: {"email": _email, "pwd": _password});
           if (response.statusCode == 200) {
             final user = UserModel.fromJson(jsonDecode(response.body));

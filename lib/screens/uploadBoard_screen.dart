@@ -27,7 +27,7 @@ class _UploadBoardScreenState extends State<UploadBoardScreen> {
 
   void uploadContent(user_id) async {
     await http
-        .post(Uri.parse('http://10.0.2.2:3000/study/uploadContent'), body: {
+        .post(Uri.parse('http://10.0.2.2:3000/board/uploadContent'), body: {
       "user_id": user_id.toString(),
       "title": title,
       "content": content,

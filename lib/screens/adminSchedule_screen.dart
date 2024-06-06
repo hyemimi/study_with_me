@@ -69,7 +69,7 @@ class _AdminScheduleScreenState extends State<AdminScheduleScreen> {
 
     // 스터디 생성
     final response = await http.post(
-        Uri.parse('http://10.0.2.2:3000/study/registerSchedule'),
+        Uri.parse('http://10.0.2.2:3000/calendar/registerSchedule'),
         headers: {"Content-Type": "application/json"},
         body: body);
     if (response.statusCode == 200) {

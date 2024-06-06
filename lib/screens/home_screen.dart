@@ -42,7 +42,8 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void logout() async {
-    final response = await http.get(Uri.parse('http://10.0.2.2:3000/logout'));
+    final response =
+        await http.get(Uri.parse('http://10.0.2.2:3000/auth/logout'));
     print("****************${response.statusCode}");
     if (response.statusCode == 200) {
       Navigator.pushNamed(context, '/login').then((value) => setState(() {}));
