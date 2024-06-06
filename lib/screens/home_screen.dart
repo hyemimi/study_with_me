@@ -75,23 +75,6 @@ class _HomeScreenState extends State<HomeScreen> {
         SizedBox(height: 10),
         HomeBanner(),
         SizedBox(height: 10),
-
-        // FutureBuilder(
-        //   future: coins,
-        //   builder: (context, AsyncSnapshot snapshot) {
-        //     print(snapshot);
-        //     if (snapshot.hasData) {
-        //       return Center(
-        //           child: ListView.builder(itemBuilder: (context, index) {
-        //             var coin = snapshot.data![index];
-        //             return Text(coin.title);
-        //           }));
-        //     }
-        //     return const Center(
-        //       child: CircularProgressIndicator(),
-        //     );
-        //   },
-        // )
         Expanded(
           child: isLoading
               ? Center(
@@ -140,7 +123,11 @@ class _HomeScreenState extends State<HomeScreen> {
                               child: Align(
                                   alignment: Alignment.center,
                                   child: Container(
-                                    color: Colors.white.withOpacity(0.6),
+                                    padding: EdgeInsets.all(4),
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10),
+                                      color: Colors.white.withOpacity(0.6),
+                                    ),
                                     child: Text(
                                       studies![index].title,
                                       style: TextStyle(

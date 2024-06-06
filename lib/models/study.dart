@@ -14,5 +14,4 @@ class StudyModel {
         time = json['time'] != null ? json['time'] : '',
         during = json['during'] != null ? json['during'] : 0,
         leader_id = json['leader_id'];
-  //during = json['during'];
 }
