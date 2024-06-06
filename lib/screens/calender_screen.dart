@@ -32,8 +32,8 @@ class _CalenderScreenState extends State<CalenderScreen> {
     eventScheduleList = await ApiService().getAllSchedule(user_id);
     setState(() {
       for (var date in eventScheduleList) {
-        _eventsList[DateTime.parse(date.time).toLocal()] = [
-          '${date.title}\n${DateFormat("yyyy-MM-dd HH:mm").format(DateTime.parse(date.time).toLocal())} ~ ${DateFormat("yyyy-MM-dd HH:mm").format(DateTime.parse(date.time).add(Duration(minutes: date.during)).toLocal())}\n${date.location}'
+        _eventsList[DateTime.parse(date.time).add(Duration(hours: 9))] = [
+          '${date.title}\n${DateFormat("yyyy-MM-dd HH:mm").format(DateTime.parse(date.time).add(Duration(hours: 9)))} ~ ${DateFormat("yyyy-MM-dd HH:mm").format(DateTime.parse(date.time).add(Duration(hours: 9, minutes: date.during)))}\n${date.location}'
         ];
       }
     });

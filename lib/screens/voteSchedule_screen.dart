@@ -143,7 +143,7 @@ class _voteScheduleScreenState extends State<voteScheduleScreen> {
                                   SizedBox(
                                       width: 160,
                                       child: Text(
-                                          '${DateFormat("yyyy-MM-dd HH:mm").format(DateTime.parse(it.time).toLocal())}\n~${DateFormat("yyyy-MM-dd HH:mm").format(DateTime.parse(it.time).add(Duration(minutes: it.during)).toLocal())}',
+                                          '${DateFormat("yyyy-MM-dd HH:mm").format(DateTime.parse(it.time).add(Duration(hours: 9)))}\n~${DateFormat("yyyy-MM-dd HH:mm").format(DateTime.parse(it.time).add(Duration(hours: 9, minutes: it.during)))}',
                                           style: TextStyle(fontSize: 18),
                                           textAlign: TextAlign.start)),
                                   //SizedBox(width: 150),

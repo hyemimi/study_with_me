@@ -21,6 +21,11 @@ class _BoardScreenState extends State<BoardScreen> {
   late List<BoardModel> boards = [];
   void waitForBoard() async {
     boards = await ApiService().getBoard(widget.study.invite_code);
+    // DateTime dateTime = DateTime.parse(boards[0].time);
+    // dateTime = dateTime.add(DateTime.parse(boards[0].time).timeZoneOffset);
+    //
+    // print(dateTime.toLocal());
+
     setState(() {});
   }
 
@@ -91,7 +96,7 @@ class _BoardScreenState extends State<BoardScreen> {
                                       child: Text(
                                           DateFormat('yyyy-MM-dd').format(
                                               DateTime.parse(board.time)
-                                                  .toLocal()),
+                                                  .add(Duration(hours: 9))),
                                           textAlign: TextAlign.center)),
                                   Row(children: [
                                     SizedBox(width: 10),
