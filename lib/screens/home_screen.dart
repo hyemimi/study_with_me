@@ -20,12 +20,11 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  //Future<List<StudyModel>> studies = ApiService().getStudies();
   List<StudyModel> studies = [];
   bool isLoading = true;
-  //UserProvider _userProvider = Provider.of<UserProvider>(context);
-  //print(arguments['exampleArgument']);
   final context = CandyGlobalVariable.naviagatorState.currentState!.context;
+  UserProvider _userProvider = Provider.of<UserProvider>(
+      CandyGlobalVariable.naviagatorState.currentState!.context);
 
   void waitForStudies() async {
     studies = await ApiService()
@@ -42,8 +41,9 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void logout() async {
-    final response =
-        await http.get(Uri.parse('http://10.0.2.2:3000/auth/logout'));
+    final response = await http.post(
+        Uri.parse('http://10.0.2.2:3000/auth/logout'),
+        body: {"email": _userProvider.email});
     print("****************${response.statusCode}");
     if (response.statusCode == 200) {
       Navigator.pushNamed(context, '/login').then((value) => setState(() {}));
@@ -53,13 +53,12 @@ class _HomeScreenState extends State<HomeScreen> {
   // 프로바이더 인스턴스 생성
   @override
   Widget build(BuildContext context) {
-    UserProvider _userProvider = Provider.of<UserProvider>(context);
-
     return Scaffold(
       appBar: CustomAppBar(title: 'Study With Me'),
       body: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
         SizedBox(height: 10),
         Row(mainAxisAlignment: MainAxisAlignment.end, children: [
+          TextButton(onPressed: () => logout(), child: Text('로그아웃')),
           SizedBox(
             width: 40,
             height: 40,

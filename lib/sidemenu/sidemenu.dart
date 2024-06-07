@@ -88,6 +88,17 @@ class _SideMenuState extends State<SideMenu> {
               ),
             ),
           ),
+          ListTile(
+            leading: Icon(Icons.home),
+            title: Text('홈'),
+            onTap: () => Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => Tabs(selectedIndex: 0),
+                fullscreenDialog: true,
+              ),
+            ),
+          ),
           isLeader
               ? ListTile(
                   leading: Icon(Icons.access_time_sharp),

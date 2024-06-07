@@ -167,7 +167,8 @@ class _addStudyFormState extends State<addStudyForm> {
                                       MaterialPageRoute(
                                           builder: (context) => AddUserScreen(
                                               invite_code: response.body,
-                                              title: _title)))
+                                              title: _title),
+                                          fullscreenDialog: true))
                                   .then((value) => setState(() {}));
                             },
                             child: Text('유저 초대')),
