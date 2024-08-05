@@ -41,6 +41,7 @@ Study with Me는 스터디와 관련된 모든 프로세스를 하나로 통합�
 
 ![image](https://github.com/user-attachments/assets/f3c1e9d2-bd30-4f1f-843e-4b6a942b2300)
 
+**🖐️Server Repository https://github.com/hyemimi/Study-with-me**
 
 ## 📬 Contact
 
