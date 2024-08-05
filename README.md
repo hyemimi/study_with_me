@@ -1,16 +1,41 @@
-# study_with_me
+# 📚 Study with Me
 
-A new Flutter project.
+![image](https://github.com/user-attachments/assets/c9fbdaf0-8218-4484-a2ff-7f9992e13e02)
 
-## Getting Started
+## ✨ About the Project
 
-This project is a starting point for a Flutter application.
+Study with Me는 스터디와 관련된 모든 프로세스를 하나로 통합하여 보다 효율적으로 관리할 수 있는 서비스를 제공합니다.
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## 🚀 Main Features
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### 1. 로그인/회원가입
+- **로그인**
+- **회원가입**: 프로필 이미지 등록 가능
+
+### 2. 홈
+- **스터디 리스트 조회**
+
+### 3. 스터디 상세 (스터디 홈)
+- **스터디 소개**: 예정된 스터디 일정 열람
+- **스터디 생성**: 배너 업로드 가능
+- **유저 초대**: 유저 초대 시 알람 전송
+- **알람 조회**: 스터디 초대 요청 수락 시 가입 완료
+- **스터디 일정 투표 등록**: 스터디장이 날짜, 시간, 장소, 진행 시간 입력
+- **스터디 일정 투표**: 모든 멤버 참여, 중복 투표 가능
+- **캘린더**: 확정된 스터디 일정 조회
+- **멤버 조회**: 해당 스터디의 멤버 리스트 조회
+- **레퍼런스 게시판**: 게시판 작성, 조회, 열람 기능
+
+## 🛠️ Software Architecture
+
+### System Architecture
+![image](https://github.com/user-attachments/assets/43264cbb-76c8-4241-b575-6dd4980d397f)
+
+### ER Diagram
+![image](https://github.com/user-attachments/assets/f3c1e9d2-bd30-4f1f-843e-4b6a942b2300)
+
+
+## 📬 Contact
+
+(**Frontend, Backend**) 이혜미 ✉️ [hyemi7375@gmail.com](mailto:hyemi7375@gmail.com)
