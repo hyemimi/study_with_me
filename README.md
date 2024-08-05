@@ -27,12 +27,18 @@ Study with Me는 스터디와 관련된 모든 프로세스를 하나로 통합�
 - **멤버 조회**: 해당 스터디의 멤버 리스트 조회
 - **레퍼런스 게시판**: 게시판 작성, 조회, 열람 기능
 
+## 📱 Screens
+![image](https://github.com/user-attachments/assets/3e3b97eb-7466-42a9-8550-dcbbc3f8f92e)
+![image](https://github.com/user-attachments/assets/b672bf85-226d-4d05-acee-6eb78b45da1b)
+![image](https://github.com/user-attachments/assets/7579cee7-aa30-4e50-af85-2be94a02e23f)
+![image](https://github.com/user-attachments/assets/29501957-19a4-4d10-a987-13842d426b32)
+![image](https://github.com/user-attachments/assets/4e0f140c-f7af-41f9-9bc0-33e0d1de307b)
+
+
 ## 🛠️ Software Architecture
 
-### System Architecture
 ![image](https://github.com/user-attachments/assets/43264cbb-76c8-4241-b575-6dd4980d397f)
 
-### ER Diagram
 ![image](https://github.com/user-attachments/assets/f3c1e9d2-bd30-4f1f-843e-4b6a942b2300)
 
 
